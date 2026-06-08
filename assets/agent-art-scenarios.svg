@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Escenarios soportados</title>
+  <desc id="desc">Error, solicitud, QA y entrega entran por puertas separadas al mismo sistema de objetivos.</desc>
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.019" numOctaves="2" seed="34"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M1 1 L13 7 L1 13" fill="none" stroke="#e06324" stroke-width="3" stroke-linecap="round"/></marker>
+    <style>
+      .line{fill:none;stroke:#171717;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;filter:url(#rough)}
+      .thin{fill:none;stroke:#171717;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:url(#rough)}
+      .orange{fill:none;stroke:#e06324;stroke-width:4;stroke-linecap:round;marker-end:url(#arrow);filter:url(#rough)}
+      .blue{fill:none;stroke:#2767c7;stroke-width:4;stroke-dasharray:12 12;stroke-linecap:round;filter:url(#rough)}
+      .label{font:700 31px 'Segoe Print','Comic Sans MS',cursive;fill:#171717}
+      .small{font:700 25px 'Segoe Print','Comic Sans MS',cursive;fill:#171717}
+      .red{font:700 26px 'Segoe Print','Comic Sans MS',cursive;fill:#bf3129}
+      .blueText{font:700 26px 'Segoe Print','Comic Sans MS',cursive;fill:#2767c7}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="#fff"/>
+  <g transform="translate(115 145)">
+    <rect class="line" x="0" y="0" width="260" height="140" rx="22"/><text class="label" x="70" y="82">error</text><text class="red" x="58" y="125">prod</text>
+    <rect class="line" x="0" y="190" width="260" height="140" rx="22"/><text class="label" x="42" y="275">solicitud</text>
+    <rect class="line" x="0" y="380" width="260" height="140" rx="22"/><text class="label" x="94" y="465">QA</text>
+    <rect class="line" x="0" y="570" width="260" height="140" rx="22"/><text class="label" x="55" y="655">entrega</text>
+  </g>
+
+  <g transform="translate(665 210)">
+    <path class="line" d="M0 80 C95 -10 300 -25 405 85 C500 185 470 410 340 500 C205 595 40 520 -20 395 C-75 275 -70 145 0 80Z"/>
+    <path d="M170 205 C120 200 95 260 120 315 C140 360 225 360 250 315 C275 260 235 210 170 205Z" fill="#111"/>
+    <circle cx="165" cy="265" r="9" fill="#fff"/><circle cx="205" cy="265" r="9" fill="#fff"/>
+    <path class="thin" d="M250 285 C315 280 350 250 380 220"/>
+    <text class="label" x="92" y="570">enrutador</text>
+  </g>
+
+  <path class="orange" d="M375 215 C500 210 560 230 650 265"/>
+  <path class="orange" d="M375 405 C500 390 570 395 650 375"/>
+  <path class="orange" d="M375 595 C510 580 570 540 665 500"/>
+  <path class="orange" d="M375 785 C575 735 690 645 760 565"/>
+
+  <g transform="translate(1130 165)">
+    <rect class="line" x="0" y="0" width="340" height="470" rx="32"/>
+    <path class="thin" d="M0 110 h340 M0 220 h340 M0 330 h340"/>
+    <text class="small" x="62" y="70">incidente</text>
+    <text class="small" x="50" y="180">desarrollo</text>
+    <text class="small" x="70" y="290">qa local</text>
+    <text class="small" x="72" y="400">despliegue</text>
+  </g>
+  <path class="blue" d="M1020 720 C840 810 560 805 330 720"/>
+  <text class="blueText" x="655" y="835">misma estructura, distinto flujo</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Equipo de agentes Sky</title>
+  <desc id="desc">El orquestador reparte trabajo a contexto, plan, desarrollo, QA, revision, entrega y memoria.</desc>
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.021" numOctaves="2" seed="21"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M1 1 L13 7 L1 13" fill="none" stroke="#e06324" stroke-width="3" stroke-linecap="round"/></marker>
+    <style>
+      .line{fill:none;stroke:#171717;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;filter:url(#rough)}
+      .thin{fill:none;stroke:#171717;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:url(#rough)}
+      .orange{fill:none;stroke:#e06324;stroke-width:4;stroke-linecap:round;marker-end:url(#arrow);filter:url(#rough)}
+      .blue{fill:none;stroke:#2767c7;stroke-width:4;stroke-dasharray:12 12;stroke-linecap:round;filter:url(#rough)}
+      .label{font:700 32px 'Segoe Print','Comic Sans MS',cursive;fill:#171717}
+      .small{font:700 24px 'Segoe Print','Comic Sans MS',cursive;fill:#171717}
+      .red{font:700 26px 'Segoe Print','Comic Sans MS',cursive;fill:#bf3129}
+      .blueText{font:700 26px 'Segoe Print','Comic Sans MS',cursive;fill:#2767c7}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="#fff"/>
+
+  <g transform="translate(660 255)">
+    <rect class="line" x="-85" y="-70" width="310" height="250" rx="44"/>
+    <path d="M45 25 C5 20 -15 65 0 110 C15 155 85 155 105 110 C125 65 105 28 45 25Z" fill="#111"/>
+    <circle cx="40" cy="77" r="8" fill="#fff"/><circle cx="72" cy="77" r="8" fill="#fff"/>
+    <path class="thin" d="M93 85 C145 72 160 45 185 20"/>
+    <text class="label" x="-36" y="222">orchestrator</text>
+    <text class="red" x="133" y="-25">decide</text>
+  </g>
+
+  <g transform="translate(90 120)">
+    <rect class="line" x="0" y="0" width="250" height="130" rx="20"/><text class="small" x="54" y="75">contexto</text>
+  </g>
+  <g transform="translate(120 520)">
+    <rect class="line" x="0" y="0" width="250" height="130" rx="20"/><text class="small" x="72" y="75">plan</text>
+  </g>
+  <g transform="translate(520 645)">
+    <rect class="line" x="0" y="0" width="250" height="130" rx="20"/><text class="small" x="40" y="75">desarrollo</text>
+  </g>
+  <g transform="translate(945 640)">
+    <rect class="line" x="0" y="0" width="250" height="130" rx="20"/><text class="small" x="82" y="75">QA</text>
+  </g>
+  <g transform="translate(1235 380)">
+    <rect class="line" x="0" y="0" width="250" height="130" rx="20"/><text class="small" x="56" y="75">revision</text>
+  </g>
+  <g transform="translate(1165 105)">
+    <rect class="line" x="0" y="0" width="285" height="130" rx="20"/><text class="small" x="72" y="75">entrega</text>
+  </g>
+
+  <path class="orange" d="M605 310 C460 220 365 175 345 175"/>
+  <path class="orange" d="M605 395 C465 500 385 565 375 585"/>
+  <path class="orange" d="M720 500 C675 585 645 625 635 645"/>
+  <path class="orange" d="M880 500 C960 565 1015 615 1040 640"/>
+  <path class="orange" d="M915 365 C1075 385 1180 425 1235 445"/>
+  <path class="orange" d="M900 300 C1020 210 1105 170 1165 165"/>
+
+  <g transform="translate(730 555)">
+    <path class="blue" d="M0 150 C160 235 420 220 560 115"/>
+    <text class="blueText" x="185" y="245">aprendizajes vuelven</text>
+  </g>
+  <text class="red" x="558" y="137">un dueño por tarea</text>
+</svg>

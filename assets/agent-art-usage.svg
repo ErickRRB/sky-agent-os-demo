@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Uso real del runner</title>
+  <desc id="desc">Codex, inbox y runner producen el próximo prompt de agente.</desc>
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="55"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M1 1 L13 7 L1 13" fill="none" stroke="#e06324" stroke-width="3" stroke-linecap="round"/></marker>
+    <style>
+      .line{fill:none;stroke:#171717;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;filter:url(#rough)}
+      .thin{fill:none;stroke:#171717;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:url(#rough)}
+      .orange{fill:none;stroke:#e06324;stroke-width:5;stroke-linecap:round;marker-end:url(#arrow);filter:url(#rough)}
+      .blue{fill:none;stroke:#2767c7;stroke-width:4;stroke-dasharray:13 13;stroke-linecap:round;filter:url(#rough)}
+      .label{font:700 34px 'Segoe Print','Comic Sans MS',cursive;fill:#171717}
+      .small{font:700 25px 'Segoe Print','Comic Sans MS',cursive;fill:#171717}
+      .red{font:700 27px 'Segoe Print','Comic Sans MS',cursive;fill:#bf3129}
+      .blueText{font:700 27px 'Segoe Print','Comic Sans MS',cursive;fill:#2767c7}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="#fff"/>
+  <g transform="translate(120 250)">
+    <rect class="line" x="0" y="0" width="360" height="240" rx="28"/>
+    <path class="thin" d="M35 65 h285 M35 120 h245 M35 175 h300"/>
+    <text class="label" x="48" y="-35">pégalo en Codex</text>
+    <text class="small" x="48" y="220">\"analiza este error\"</text>
+  </g>
+  <g transform="translate(545 210)">
+    <path d="M115 155 C65 150 35 215 60 275 C82 325 170 325 195 275 C220 218 185 160 115 155Z" fill="#111"/>
+    <circle cx="110" cy="215" r="10" fill="#fff"/><circle cx="150" cy="215" r="10" fill="#fff"/>
+    <path class="thin" d="M185 235 C250 220 280 180 315 145"/>
+    <rect class="line" x="290" y="65" width="220" height="140" rx="20"/>
+    <text class="small" x="330" y="145">_inbox</text>
+    <text class="label" x="36" y="420">elige modo</text>
+  </g>
+  <path class="orange" d="M485 370 C575 345 625 330 710 320"/>
+  <path class="orange" d="M925 325 C1040 315 1105 345 1190 400"/>
+  <g transform="translate(1130 260)">
+    <rect class="line" x="0" y="0" width="360" height="260" rx="34"/>
+    <text class="small" x="58" y="78">correr una vez</text>
+    <path class="thin" d="M55 110 h240 M55 160 h260 M55 210 h180"/>
+    <text class="small" x="58" y="325">próximo agente</text>
+  </g>
+  <path class="blue" d="M1240 640 C940 760 540 720 245 590"/>
+  <text class="blueText" x="650" y="785">estado guardado</text>
+  <text class="red" x="1110" y="190">si falta OK, se detiene</text>
+</svg>

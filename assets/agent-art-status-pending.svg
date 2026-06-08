@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Estado, gates y pendientes</title>
+  <desc id="desc">El sistema valida, registra pendientes y pide aprobación antes de escribir afuera.</desc>
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="89"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M1 1 L13 7 L1 13" fill="none" stroke="#e06324" stroke-width="3" stroke-linecap="round"/></marker>
+    <style>
+      .line{fill:none;stroke:#171717;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;filter:url(#rough)}
+      .thin{fill:none;stroke:#171717;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:url(#rough)}
+      .orange{fill:none;stroke:#e06324;stroke-width:4;stroke-linecap:round;marker-end:url(#arrow);filter:url(#rough)}
+      .blue{fill:none;stroke:#2767c7;stroke-width:4;stroke-dasharray:13 13;stroke-linecap:round;filter:url(#rough)}
+      .label{font:700 34px 'Segoe Print','Comic Sans MS',cursive;fill:#171717}
+      .small{font:700 25px 'Segoe Print','Comic Sans MS',cursive;fill:#171717}
+      .red{font:700 27px 'Segoe Print','Comic Sans MS',cursive;fill:#bf3129}
+      .blueText{font:700 27px 'Segoe Print','Comic Sans MS',cursive;fill:#2767c7}
+      .orangeText{font:700 27px 'Segoe Print','Comic Sans MS',cursive;fill:#e06324}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="#fff"/>
+
+  <g transform="translate(115 185)">
+    <rect class="line" x="0" y="0" width="380" height="480" rx="34"/>
+    <text class="label" x="54" y="70">estado</text>
+    <path class="thin" d="M55 130 h270 M55 195 h305 M55 260 h230 M55 325 h290 M55 390 h255"/>
+    <text class="small" x="80" y="180">agente actual</text>
+    <text class="small" x="80" y="245">gates</text>
+    <text class="small" x="80" y="310">decisiones</text>
+    <text class="small" x="80" y="375">evidencia</text>
+  </g>
+
+  <path class="orange" d="M505 430 C610 380 680 375 775 410"/>
+
+  <g transform="translate(735 260)">
+    <path d="M130 155 C75 150 45 220 70 280 C92 335 190 335 218 280 C245 220 205 160 130 155Z" fill="#111"/>
+    <circle cx="125" cy="222" r="10" fill="#fff"/><circle cx="168" cy="222" r="10" fill="#fff"/>
+    <path class="thin" d="M212 245 C285 230 330 190 365 150"/>
+    <rect class="line" x="345" y="80" width="185" height="130" rx="18"/>
+    <text class="small" x="378" y="155">gate</text>
+    <text class="orangeText" x="70" y="400">dos intentos</text>
+  </g>
+
+  <path class="orange" d="M1045 420 C1125 390 1205 395 1285 430"/>
+
+  <g transform="translate(1190 225)">
+    <path class="line" d="M35 120 l300 45 l-35 410 l-280 -42Z"/>
+    <path class="thin" d="M70 205 h205 M70 270 h225 M70 335 h180 M70 400 h220"/>
+    <text class="label" x="56" y="92">pendientes</text>
+    <text class="red" x="65" y="455">no brute-force</text>
+  </g>
+
+  <path class="blue" d="M1275 690 C940 800 530 770 230 675"/>
+  <text class="blueText" x="565" y="815">aprueba una persona o sigue otro trabajo</text>
+</svg>
