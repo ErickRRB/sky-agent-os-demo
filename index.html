@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sky Agent OS - Demo operativa</title>
+  <title>Sky Agent OS - Sky Inbox operativo</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23171717'/%3E%3Ccircle cx='24' cy='27' r='5' fill='white'/%3E%3Ccircle cx='40' cy='27' r='5' fill='white'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -536,6 +536,71 @@
       transform: translate(-50%, 0);
     }
 
+    .keyword {
+      position: relative;
+      display: inline;
+      font-weight: 800;
+      text-decoration-line: underline;
+      text-decoration-style: dotted;
+      text-decoration-thickness: 2px;
+      text-decoration-color: var(--orange);
+      text-underline-offset: 4px;
+      cursor: help;
+    }
+
+    .keyword::after {
+      content: attr(data-detail);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      z-index: 35;
+      width: min(330px, 78vw);
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 6px);
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .keyword:hover::after,
+    .keyword:focus::after {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .keyword:focus-visible {
+      outline: 2px solid rgba(243, 142, 29, 0.45);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .glossary-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: -10px 0 28px;
+    }
+
+    .glossary-strip .keyword {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
     .tabs {
       display: flex;
       flex-wrap: wrap;
@@ -658,20 +723,114 @@
       font-size: 15px;
     }
 
-    .terminal {
-      overflow-x: auto;
-      padding: 16px;
-      border: 1px solid #1c1c1c;
+    .assistant-screen {
+      display: grid;
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
       border-radius: 8px;
-      background: #111;
-      color: #f5f2eb;
-      font-family: var(--mono);
-      font-size: 12px;
-      line-height: 1.65;
+      background: #101112;
+      color: #f7f4ed;
+      box-shadow: var(--shadow);
     }
 
-    .terminal span {
+    .screen-top {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(247, 244, 237, 0.76);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .screen-top strong {
+      min-width: 0;
+      color: #fff;
+      overflow-wrap: anywhere;
+    }
+
+    .screen-dots {
+      display: inline-flex;
+      gap: 5px;
+    }
+
+    .screen-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--orange);
+    }
+
+    .screen-dots span:nth-child(2) {
+      background: var(--blue);
+    }
+
+    .screen-dots span:nth-child(3) {
+      background: var(--green);
+    }
+
+    .chat-message {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .chat-message.user {
+      margin-left: 38px;
+      background: rgba(77, 123, 255, 0.14);
+    }
+
+    .chat-message.assistant {
+      margin-right: 38px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .message-label {
+      font-family: var(--mono);
+      font-size: 11px;
       color: #f5a36a;
+      text-transform: uppercase;
+    }
+
+    .chat-message p {
+      margin: 0;
+      color: rgba(247, 244, 237, 0.88);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .response-grid {
+      display: grid;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .response-line {
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr);
+      gap: 10px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 13px;
+    }
+
+    .response-line strong {
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .response-line span {
+      min-width: 0;
+      color: rgba(247, 244, 237, 0.78);
+      overflow-wrap: anywhere;
     }
 
     .pending-table {
@@ -793,8 +952,23 @@
       }
 
       .comparison-row,
-      .state-line {
+      .state-line,
+      .response-line {
         grid-template-columns: 1fr;
+      }
+
+      .screen-top {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .screen-top > span {
+        grid-column: 2;
+      }
+
+      .chat-message.user,
+      .chat-message.assistant {
+        margin-left: 0;
+        margin-right: 0;
       }
 
       .pending-table {
@@ -823,11 +997,10 @@
     <main>
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Demo para toda la empresa</p>
-          <h1>Un equipo de asistentes para convertir pedidos en trabajo claro.</h1>
+          <p class="eyebrow">Sky Inbox operativo</p>
+          <h1>Un equipo de <strong class="keyword" tabindex="0" data-detail="Roles de IA con una responsabilidad concreta dentro del flujo de trabajo.">asistentes</strong> para mover análisis, desarrollo y producción sin perder contexto.</h1>
           <p>
-            Sky Agent OS toma una necesidad, problema o idea, la ordena, reparte el trabajo,
-            pide ayuda cuando hace falta y deja una entrega lista para revisar.
+            <strong class="keyword" tabindex="0" data-detail="Sistema operativo de trabajo con IA: ordena entradas del Sky Inbox, responsables, estado y entregas.">Sky Agent OS</strong> toma una entrada del <strong class="keyword" tabindex="0" data-detail="Bandeja donde entran tickets, errores, pedidos de análisis, validaciones y tareas de deploy.">Sky Inbox</strong>, detecta si es ticket, error, validación o deploy, elige la <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong> correcta y deja el siguiente paso claro.
           </p>
           <div class="hero-actions">
             <a class="button" href="#flujo">Ver el flujo</a>
@@ -836,19 +1009,19 @@
         </div>
 
         <aside class="hero-visual" aria-label="Ilustración del flujo Sky Agent OS">
-          <img src="assets/agent-art-company-flow.png" alt="Ilustración renderizada: pedido, problema e idea se transforman en claridad, plan, trabajo, validación y entrega.">
+          <img src="assets/agent-art-company-flow.png" alt="Ilustración renderizada: entradas del Sky Inbox se transforman en análisis, plan, desarrollo, validación y producción.">
           <div class="hero-status">
             <div class="status-cell">
               <strong>Entrada</strong>
-              <span>necesidad, problema o idea</span>
+              <span>ticket, error, análisis o deploy</span>
             </div>
             <div class="status-cell">
               <strong>Orden</strong>
-              <span>claridad, plan y responsables</span>
+              <span>skill, plan y responsable</span>
             </div>
             <div class="status-cell">
               <strong>Salida</strong>
-              <span>siguiente paso y entrega</span>
+              <span>MR, validación, doc o producción</span>
             </div>
           </div>
         </aside>
@@ -856,48 +1029,47 @@
 
       <section id="flujo" class="band white">
         <div class="section-head">
-          <h2>De pedido a entrega</h2>
+          <h2>De Sky Inbox a producción</h2>
           <p>
-            La primera capa es simple: entender qué se necesita, ordenar el trabajo,
-            avanzar con responsables claros y detenerse cuando haga falta una decisión humana.
+            La primera capa es simple: entra un caso al <strong class="keyword" tabindex="0" data-detail="Bandeja donde entran tickets, errores, pedidos de análisis, validaciones y tareas de deploy.">Sky Inbox</strong>, se identifica el tipo de trabajo, se asigna una <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong>, se avanza con responsables claros y se frena cuando haga falta una <strong class="keyword" tabindex="0" data-detail="Punto donde el sistema pide criterio, prioridad u OK de una persona antes de seguir.">decisión humana</strong>.
           </p>
         </div>
 
         <figure class="agent-art-figure contain">
-          <img src="assets/agent-art-usage-simple.png" alt="Ilustración renderizada: una necesidad se prioriza, se hace, se revisa y termina en siguiente paso o entrega.">
-          <figcaption>Una necesidad entra, se prioriza, se trabaja, se revisa y vuelve como aprendizaje para la próxima vez.</figcaption>
+          <img src="assets/agent-art-usage-simple.png" alt="Ilustración renderizada: un caso entra al Sky Inbox, se analiza, se implementa, se valida y queda listo para continuar.">
+          <figcaption>Un caso entra al Sky Inbox, se clasifica, se trabaja, se valida y vuelve como aprendizaje para la próxima vez.</figcaption>
         </figure>
 
         <div class="flow-board" aria-label="Flujo operativo">
           <article class="flow-step">
             <small>01</small>
-            <strong>Recibir</strong>
-            <p>Llega una necesidad, un problema, una idea o una pregunta.</p>
+            <strong>Inbox</strong>
+            <p>Llega un ticket, error productivo, pedido de análisis, validación QA o tarea de deploy.</p>
           </article>
           <article class="flow-step">
             <small>02</small>
-            <strong>Aclarar</strong>
-            <p>Se separa lo importante de lo accesorio y se define qué significa éxito.</p>
+            <strong>Clasificar</strong>
+            <p>Orbi define qué tipo de caso es y qué <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong> conviene activar.</p>
           </article>
           <article class="flow-step">
             <small>03</small>
-            <strong>Planear</strong>
-            <p>Planny propone camino, riesgos y orden de trabajo.</p>
+            <strong>Analizar</strong>
+            <p><strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong> separa evidencia de inferencia y deja claro qué falta confirmar.</p>
           </article>
           <article class="flow-step">
             <small>04</small>
-            <strong>Hacer</strong>
-            <p>Buildy avanza solo donde es seguro y marca lo que requiere acuerdo.</p>
+            <strong>Planear</strong>
+            <p><strong class="keyword" tabindex="0" data-detail="Planificador: arma el camino, marca riesgos y ordena el trabajo.">Planny</strong> define repos, pasos, riesgos, validaciones y orden de ejecución.</p>
           </article>
           <article class="flow-step">
             <small>05</small>
-            <strong>Revisar</strong>
-            <p>Quby y Revi verifican que el resultado tenga sentido antes de mostrarlo.</p>
+            <strong>Ejecutar</strong>
+            <p><strong class="keyword" tabindex="0" data-detail="Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.">Buildy</strong> implementa, debuggea o documenta sin pisar trabajo en curso.</p>
           </article>
           <article class="flow-step">
             <small>06</small>
-            <strong>Cierre</strong>
-            <p>Packy deja una entrega, próximos pasos y aprendizajes para el equipo.
+            <strong>Validar y publicar</strong>
+            <p><strong class="keyword" tabindex="0" data-detail="Validador: prueba lo importante y avisa si algo no está listo.">Quby</strong>, <strong class="keyword" tabindex="0" data-detail="Revisor: mira el resultado con criterio antes de compartirlo.">Revi</strong> y <strong class="keyword" tabindex="0" data-detail="Encargado de entrega: deja MR, resumen, deploy note o documentación lista para continuar.">Packy</strong> dejan MR, QA, documentación o paso a producción.
               <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se guarda en una carpeta retomable con objetivo, estado, salidas por rol y decisiones pendientes.">detalle</span>
             </p>
           </article>
@@ -908,8 +1080,7 @@
         <div class="section-head">
           <h2>Qué mejora del flujo anterior</h2>
           <p>
-            Antes cada conversación podía convertirse en una pila de mensajes. Ahora cada pedido
-            queda ordenado, retomable y con una persona o asistente responsable del próximo paso.
+            Antes cada ticket, análisis o incidente podía quedar mezclado en conversación. Ahora entra por el <strong class="keyword" tabindex="0" data-detail="Bandeja donde entran tickets, errores, pedidos de análisis, validaciones y tareas de deploy.">Sky Inbox</strong> y queda ordenado, retomable y con una persona o <strong class="keyword" tabindex="0" data-detail="Agente de IA especializado que toma una parte del trabajo y deja una salida clara.">asistente</strong> responsable del próximo paso.
           </p>
         </div>
 
@@ -923,7 +1094,7 @@
             <div class="panel-header">ANTES</div>
             <div class="panel-body">
               <h3>Trabajo dependiente de la conversación</h3>
-              <p>El contexto, las decisiones, los bloqueos y los siguientes pasos quedaban mezclados en conversación.</p>
+              <p>El contexto de Jira, repos, logs, QA, decisiones y próximos pasos quedaba mezclado entre mensajes.</p>
               <div class="comparison">
                 <div class="comparison-row">
                   <strong>Orden</strong>
@@ -931,11 +1102,11 @@
                 </div>
                 <div class="comparison-row">
                   <strong>Bloqueos</strong>
-                  <span>Riesgo de insistir sobre el mismo problema sin una nueva decisión.</span>
+                  <span>Riesgo de repetir la misma prueba, el mismo push o la misma query sin nueva evidencia.</span>
                 </div>
                 <div class="comparison-row">
                   <strong>Revisión</strong>
-                  <span>Dependía de que alguien pidiera explícitamente el siguiente paso.</span>
+                  <span>Dependía de que alguien pidiera explícitamente revisión, QA, deploy o documentación.</span>
                 </div>
               </div>
             </div>
@@ -944,12 +1115,12 @@
           <article class="panel">
             <div class="panel-header">AHORA</div>
             <div class="panel-body">
-              <h3>Trabajo gobernado por objetivo</h3>
-              <p>Cada pedido queda convertido en un objetivo claro, con responsables y frenos visibles.</p>
+              <h3>Trabajo gobernado por <strong class="keyword" tabindex="0" data-detail="Resultado esperado del pedido, con alcance, límites y criterios para saber si está terminado.">objetivo</strong></h3>
+              <p>Cada entrada queda convertida en objetivo claro, skill activa, responsables, validaciones y frenos visibles.</p>
               <div class="comparison">
                 <div class="comparison-row">
                   <strong>Orden</strong>
-                  <span>Orbi sabe qué viene después y a quién llamar.</span>
+                  <span><strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué asistente sigue según el objetivo y el estado actual.">Orbi</strong> sabe si corresponde refinement, debugging, desarrollo, QA, deploy o doc.</span>
                 </div>
                 <div class="comparison-row">
                   <strong>Bloqueos</strong>
@@ -969,8 +1140,8 @@
         <div class="section-head">
           <h2>El equipo</h2>
           <p>
-            Para que la demo sea fácil de recordar, cada asistente tiene nombre, accesorio y una misión.
-            Orbi coordina; los demás resuelven una parte concreta del trabajo.
+            Para que el flujo sea fácil de recordar, cada <strong class="keyword" tabindex="0" data-detail="Agente de IA especializado que toma una parte del trabajo y deja una salida clara.">asistente</strong> tiene nombre, accesorio y una misión.
+            <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué asistente sigue según el objetivo y el estado actual.">Orbi</strong> coordina; los demás resuelven una parte concreta del trabajo.
           </p>
         </div>
 
@@ -982,44 +1153,44 @@
         <div class="agent-grid">
           <article class="agent-tile">
             <span class="tag blue">control</span>
-            <strong>Orbi</strong>
-            <p>Coordina el trabajo, decide quién sigue y frena si falta una decisión humana.
+            <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué asistente sigue según el objetivo y el estado actual.">Orbi</strong>
+            <p>Lee el Sky Inbox, decide qué flujo sigue y frena si falta una <strong class="keyword" tabindex="0" data-detail="Punto donde el sistema pide criterio, prioridad u OK de una persona antes de seguir.">decisión humana</strong>.
               <span class="tech-hint" tabindex="0" data-detail="Rol interno: orquestador. Decide el próximo paso con el estado guardado del objetivo.">detalle</span>
             </p>
           </article>
           <article class="agent-tile">
             <span class="tag orange">contexto</span>
-            <strong>Specter</strong>
-            <p>Convierte una idea vaga en una definición entendible, con preguntas y criterios de éxito.</p>
+            <strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong>
+            <p>Lee tickets, logs, repos y contexto para separar evidencia, inferencia y preguntas abiertas.</p>
           </article>
           <article class="agent-tile">
             <span class="tag blue">plan</span>
-            <strong>Planny</strong>
-            <p>Arma el camino, marca riesgos y decide el orden más razonable.</p>
+            <strong class="keyword" tabindex="0" data-detail="Planificador: arma el camino, marca riesgos y ordena el trabajo.">Planny</strong>
+            <p>Arma el plan de repos, cambios, pruebas, riesgos, dependencias y orden de ejecución.</p>
           </article>
           <article class="agent-tile">
             <span class="tag green">desarrollo</span>
-            <strong>Buildy</strong>
-            <p>Hace el cambio con cuidado y respeta lo que ya estaba en curso.</p>
+            <strong class="keyword" tabindex="0" data-detail="Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.">Buildy</strong>
+            <p>Implementa, debuggea, ajusta documentación o prepara scripts sin pisar trabajo en curso.</p>
           </article>
           <article class="agent-tile">
             <span class="tag green">validación</span>
-            <strong>Quby</strong>
-            <p>Prueba lo importante y avisa si algo todavía no está listo.</p>
+            <strong class="keyword" tabindex="0" data-detail="Validador: prueba lo importante y avisa si algo no está listo.">Quby</strong>
+            <p>Corre checks, smoke tests, QA guiada o validaciones específicas del caso.</p>
           </article>
           <article class="agent-tile">
             <span class="tag blue">revisión</span>
-            <strong>Revi</strong>
-            <p>Mira el resultado con ojo crítico antes de que salga a otros equipos.</p>
+            <strong class="keyword" tabindex="0" data-detail="Revisor: mira el resultado con criterio antes de compartirlo.">Revi</strong>
+            <p>Revisa bugs, riesgos, arquitectura, cobertura y posibles regresiones antes del MR o deploy.</p>
           </article>
           <article class="agent-tile">
             <span class="tag orange">entrega</span>
-            <strong>Packy</strong>
-            <p>Prepara la entrega, el resumen y lo que otra persona necesita para continuar.</p>
+            <strong class="keyword" tabindex="0" data-detail="Encargado de entrega: deja MR, resumen, deploy note o documentación lista para continuar.">Packy</strong>
+            <p>Prepara MR, resumen, release notes, doc de deploy o handoff para producción.</p>
           </article>
           <article class="agent-tile">
             <span class="tag green">memoria</span>
-            <strong>Memo</strong>
+            <strong class="keyword" tabindex="0" data-detail="Memoria: conserva aprendizajes útiles para que la próxima corrida empiece mejor.">Memo</strong>
             <p>Guarda aprendizajes para que la próxima corrida empiece mejor.
               <span class="tech-hint" tabindex="0" data-detail="Rol interno: mejora de memoria y skills, siempre con cuidado de no cambiar reglas estables sin aprobación.">detalle</span>
             </p>
@@ -1029,56 +1200,56 @@
 
       <section id="escenarios" class="band soft">
         <div class="section-head">
-          <h2>Escenarios soportados</h2>
+          <h2>Escenarios del Sky Inbox</h2>
           <p>
-            La entrada puede venir desde producto, soporte, tecnología, diseño o dirección.
-            Lo importante es la intención: resolver, construir, validar o preparar una entrega.
+            La entrada puede ser un ticket de Jira, un bug productivo, una validación QA,
+            una preparación de deploy, una revisión de arquitectura o una mejora de documentación.
           </p>
         </div>
 
         <figure class="agent-art-figure contain">
-          <img src="assets/agent-art-scenarios-company.png" alt="Ilustración renderizada de escenarios: problema, idea, validación y entrega entran a un organizador y salen como por decidir, en curso, por revisar y hecho.">
-          <figcaption>Un problema, una solicitud, una validación o una entrega usan la misma estructura de trabajo.</figcaption>
+          <img src="assets/agent-art-scenarios-company.png" alt="Ilustración renderizada de escenarios: ticket, error productivo, validación QA y deploy entran a un organizador y salen como por decidir, en curso, por revisar y hecho.">
+          <figcaption>Un ticket, un error productivo, una validación o un deploy usan la misma estructura de trabajo.</figcaption>
         </figure>
 
         <div class="tabs" role="tablist" aria-label="Escenarios de trabajo">
-          <button class="tab-button" type="button" role="tab" aria-selected="true" data-scenario="prod">Problema urgente</button>
-          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="ticket">Nueva iniciativa</button>
-          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="qa">Validación</button>
-          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="release">Entrega</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="true" data-scenario="prod">Error prod</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="ticket">Ticket Jira</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="qa">QA</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="release">Deploy</button>
         </div>
 
         <div class="scenario">
           <article class="scenario-text" id="scenario-copy">
-            <h3>Problema urgente</h3>
-            <p>Se trae un síntoma, impacto o captura. Specter busca causas probables antes de que Buildy toque nada.</p>
+            <h3>Error prod</h3>
+            <p>Entra un síntoma, alerta, log o impacto de usuario. <strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong> arma evidencia antes de que <strong class="keyword" tabindex="0" data-detail="Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.">Buildy</strong> toque código o ambiente.</p>
             <ul class="scenario-list">
-              <li>Qué pasó y a quién afecta.</li>
-              <li>Qué sabemos, qué suponemos y qué falta decidir.</li>
-              <li>Próxima acción clara, sin insistir a ciegas.</li>
+              <li>Qué pasó, dónde impacta y qué usuarios afecta.</li>
+              <li>Qué dicen logs, dashboards, repos y despliegues recientes.</li>
+              <li>Próxima acción clara: investigar, revertir, fixear, validar o escalar.</li>
             </ul>
           </article>
 
           <div class="state-machine" aria-label="Qué ve una persona">
             <div class="state-line">
               <code>1</code>
-              <span>El pedido queda resumido en una frase clara.</span>
+              <span>El caso queda clasificado: refinement, debugging, feature, QA, deploy o documentación.</span>
             </div>
             <div class="state-line">
               <code>2</code>
-              <span>El equipo sabe quién sigue y qué resultado debe producir.</span>
+              <span>Se activa la <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong> correcta y el equipo sabe quién sigue.</span>
             </div>
             <div class="state-line">
               <code>3</code>
-              <span>Las decisiones humanas aparecen como decisiones, no como fallas.</span>
+              <span>Repos, logs, comandos, tickets y decisiones quedan separados para no mezclar evidencia con suposición.</span>
             </div>
             <div class="state-line">
               <code>4</code>
-              <span>La entrega se puede explicar a otra área sin reconstruir toda la conversación.</span>
+              <span>La salida queda lista como plan, cambio, MR, reporte QA, doc de deploy o handoff a producción.</span>
             </div>
             <div class="state-line">
               <code>5</code>
-              <span>El aprendizaje queda disponible para la próxima vez.
+              <span>El <strong class="keyword" tabindex="0" data-detail="Conocimiento reutilizable que evita volver a empezar desde cero en casos parecidos.">aprendizaje</strong> queda disponible para la próxima vez.
                 <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se traduce a objetivo, estado de ejecución, salidas por rol, evidencias mínimas y pendientes accionables.">detalle</span>
               </span>
             </div>
@@ -1088,51 +1259,51 @@
 
       <section id="uso" class="band white">
         <div class="section-head">
-          <h2>Cómo se usaría en una reunión</h2>
+          <h2>Entradas reales al Sky Inbox</h2>
           <p>
-            No hace falta explicar la mecánica interna. Para una demo, alcanza con mostrar
-            una necesidad real y cómo el equipo la convierte en próximos pasos.
+            Quien abre el caso puede hablar en lenguaje normal de producto o desarrollo:
+            ticket, síntoma, repo, error, branch, validación, deploy o documentación.
           </p>
         </div>
 
         <div class="split">
           <article class="panel">
-            <div class="panel-header">Entrada humana</div>
+            <div class="panel-header">Entrada</div>
             <div class="panel-body">
-              <h3>Frases que cualquiera puede decir</h3>
+              <h3>Casos que llegan al flujo</h3>
               <div class="comparison">
                 <div class="comparison-row">
-                  <strong>Problema</strong>
-                  <span>“Tenemos este problema afectando la venta online, ¿qué hacemos primero?”</span>
+                  <strong>Jira</strong>
+                  <span>“Tomá este ticket, revisá criterios, repos afectados y dejalo listo para QA.”</span>
                 </div>
                 <div class="comparison-row">
-                  <strong>Idea</strong>
-                  <span>“Queremos mejorar este flujo, pero no sabemos por dónde partir.”</span>
+                  <strong>Bug prod</strong>
+                  <span>“Hay errores en checkout, estos son los logs y el impacto. ¿Qué hacemos primero?”</span>
                 </div>
                 <div class="comparison-row">
-                  <strong>Entrega</strong>
-                  <span>“Esto ya está avanzado, prepará lo necesario para mostrarlo y validar.”</span>
+                  <strong>Deploy</strong>
+                  <span>“Este cambio está mergeado; prepará changelog, validación y doc para pasarlo a producción.”</span>
                 </div>
               </div>
             </div>
           </article>
 
           <article class="panel">
-            <div class="panel-header">Respuesta esperada</div>
+            <div class="panel-header">Salida</div>
             <div class="panel-body">
               <h3>Lo que devuelve el sistema</h3>
               <div class="comparison">
                 <div class="comparison-row">
-                  <strong>Claridad</strong>
-                  <span>Qué se quiere lograr y qué queda fuera.</span>
+                  <strong>Diagnóstico</strong>
+                  <span>Qué se sabe, qué se infiere, qué falta confirmar y cuál es el <strong class="keyword" tabindex="0" data-detail="Resultado esperado del pedido, con alcance, límites y criterios para saber si está terminado.">objetivo</strong>.</span>
                 </div>
                 <div class="comparison-row">
-                  <strong>Plan</strong>
-                  <span>Quién toma cada parte y qué se revisa antes de avanzar.</span>
+                  <strong>Plan técnico</strong>
+                  <span>Repos, archivos, comandos, pruebas y orden de avance dentro del <strong class="keyword" tabindex="0" data-detail="Secuencia de pasos, responsables y decisiones para avanzar sin perder contexto.">flujo</strong>.</span>
                 </div>
                 <div class="comparison-row">
-                  <strong>Decisión</strong>
-                  <span>Si falta prioridad, permiso o fecha, se pide OK en vez de insistir.</span>
+                  <strong>Entrega protegida</strong>
+                  <span>MR, reporte QA, release notes, doc de deploy o publicación final con <strong class="keyword" tabindex="0" data-detail="Aprobación explícita de una persona antes de tocar algo sensible o publicar.">OK</strong> explícito.</span>
                 </div>
               </div>
             </div>
@@ -1144,8 +1315,8 @@
         <div class="section-head">
           <h2>Qué cumple hoy</h2>
           <p>
-            La versión actual ya ordena trabajo, reparte responsabilidades, valida avances
-            y deja decisiones humanas visibles antes de publicar o tocar sistemas externos.
+            La versión actual ya ordena entradas del Sky Inbox, activa skills de trabajo,
+            reparte responsabilidades, valida avances y deja <strong class="keyword" tabindex="0" data-detail="Puntos donde el sistema pide criterio, prioridad u OK de una persona antes de seguir.">decisiones humanas</strong> visibles antes de publicar o tocar sistemas externos.
           </p>
         </div>
 
@@ -1157,45 +1328,45 @@
         <div class="capability-grid">
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Trabajo ordenado</h3>
-            <p>Cada pedido queda con objetivo, alcance y siguiente paso visible.
+            <h3>Refinement y análisis</h3>
+            <p>Cada ticket queda con <strong class="keyword" tabindex="0" data-detail="Resultado esperado del pedido, con alcance, límites y criterios para saber si está terminado.">objetivo</strong>, alcance, repos probables, riesgos y preguntas abiertas.
               <span class="tech-hint" tabindex="0" data-detail="Implementación: carpeta sky-agent-os con modelo operativo, agentes, flujos, contratos, prompts y piloto.">detalle</span>
             </p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Continuidad</h3>
-            <p>Otro asistente puede retomar sin depender de recordar toda la conversación anterior.</p>
+            <h3>Debugging productivo</h3>
+            <p>Separa evidencia de inferencia, revisa logs, repos, cambios recientes y deja hipótesis accionables.</p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Clasificación inicial</h3>
-            <p>Detecta si lo que llegó es problema, iniciativa, validación, entrega o documentación.</p>
+            <h3>Desarrollo multi-repo</h3>
+            <p>Planifica cambios coordinados, respeta ramas y trabajo en curso, y deja commits o MRs trazables.</p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Avance conservador</h3>
-            <p>Busca el próximo responsable y se detiene si hay bloqueo o aprobación externa.</p>
+            <h3>QA y validación</h3>
+            <p>Define casos, corre checks automatizables, guarda resultados y marca blockers de ambiente o datos.</p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Reglas de publicación</h3>
-            <p>Puede preparar borradores y entregas, pero no publica en herramientas sensibles sin OK.</p>
+            <h3>Deploy y documentación</h3>
+            <p>Prepara changelog, release notes, doc de deploy y publicación protegida con <strong class="keyword" tabindex="0" data-detail="Aprobación explícita de una persona antes de tocar algo sensible o publicar.">OK</strong>.</p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>No insistir a ciegas</h3>
-            <p>Errores repetidos se diagnostican y se registran como pendientes accionables, no como loops infinitos.</p>
+            <h3>Memoria y skills</h3>
+            <p>Errores repetidos se registran como <strong class="keyword" tabindex="0" data-detail="Bloqueos o decisiones que quedan visibles para que una persona los resuelva.">pendientes accionables</strong> y aprendizajes para mejorar próximas corridas.</p>
           </article>
         </div>
       </section>
 
       <section id="pendientes" class="band white">
         <div class="section-head">
-          <h2>Qué queda pendiente</h2>
+          <h2>Dónde pide decisión</h2>
           <p>
-            Lo pendiente no se esconde ni se fuerza. Se transforma en una decisión clara:
-            prioridad, permiso, fecha, responsable o validación humana.
+            Lo pendiente no se esconde ni se fuerza. Se transforma en una <strong class="keyword" tabindex="0" data-detail="Elección concreta que necesita criterio humano: prioridad, permiso, fecha, responsable o alcance.">decisión clara</strong>:
+            prioridad, permiso, fecha, responsable, merge, deploy o <strong class="keyword" tabindex="0" data-detail="Revisión de una persona cuando el sistema no debe decidir solo.">validación humana</strong>.
           </p>
         </div>
 
@@ -1215,23 +1386,23 @@
           <tbody>
             <tr>
               <td><strong>Activación</strong></td>
-              <td>El flujo está preparado, pero correrlo automáticamente requiere aprobación.</td>
-              <td>Decidir cuándo activarlo para trabajo real.</td>
+              <td>El flujo está preparado para casos reales, pero automatizar corridas requiere acuerdo de equipo.</td>
+              <td>Definir qué entradas del Sky Inbox pueden avanzar solas y cuáles no.</td>
             </tr>
             <tr>
               <td><strong>Herramientas externas</strong></td>
-              <td>Puede preparar borradores, pero no escribir en sistemas sensibles sin OK.</td>
-              <td>Definir qué herramientas puede tocar solo y cuáles requieren revisión.</td>
+              <td>Puede preparar MRs, documentos, reportes o queries, pero no escribir en sistemas sensibles sin OK.</td>
+              <td>Definir permisos para Git, Jira, Confluence, Kubernetes, Dynatrace y Pages.</td>
             </tr>
             <tr>
-              <td><strong>Publicaciones</strong></td>
-              <td>La entrega se puede preparar, pero la publicación final queda protegida.</td>
-              <td>Acordar responsables para publicar, aprobar o devolver cambios.</td>
+              <td><strong>Producción</strong></td>
+              <td>El deploy se puede preparar, pero la publicación final queda protegida.</td>
+              <td>Acordar responsable de aprobación, ventana, rollback y comunicación.</td>
             </tr>
             <tr>
-              <td><strong>Piloto real</strong></td>
-              <td>Falta probarlo con un caso chico, representativo y de bajo riesgo.</td>
-              <td>Elegir el primer caso y medir si ahorra tiempo de verdad.</td>
+              <td><strong>Aprendizaje</strong></td>
+              <td>Los casos resueltos pueden mejorar skills, pero no deben cambiar reglas estables sin revisión.</td>
+              <td>Decidir qué aprendizajes pasan a skill y cuáles quedan solo como nota del caso.</td>
             </tr>
           </tbody>
         </table>
@@ -1241,51 +1412,96 @@
         <div class="section-head">
           <h2>Bajo el capó</h2>
           <p>
-            Esta parte es para tecnología o para quienes quieran entender cómo se conserva continuidad
-            entre corridas, asistentes y herramientas.
+            Esta parte es para tecnología o para quienes quieran entender cómo se conserva <strong class="keyword" tabindex="0" data-detail="Capacidad de retomar un trabajo sin reconstruir toda la conversación anterior.">continuidad</strong>
+            entre corridas, <strong class="keyword" tabindex="0" data-detail="Agentes de IA especializados que toman una parte del trabajo y dejan una salida clara.">asistentes</strong> y <strong class="keyword" tabindex="0" data-detail="Sistemas externos o utilidades que el flujo puede consultar, preparar o usar con aprobación.">herramientas</strong>.
           </p>
+        </div>
+
+        <div class="glossary-strip" aria-label="Glosario rápido de conceptos de IA">
+          <strong class="keyword" tabindex="0" data-detail="Rol de IA especializado que recibe contexto, ejecuta una parte del trabajo y deja una salida verificable.">Agente</strong>
+          <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">Skill</strong>
+          <strong class="keyword" tabindex="0" data-detail="Secuencia de pasos, responsables y decisiones para avanzar sin perder contexto.">Flujo</strong>
+          <strong class="keyword" tabindex="0" data-detail="Resultado esperado del pedido, con alcance, límites y criterios para saber si está terminado.">Objetivo</strong>
+          <strong class="keyword" tabindex="0" data-detail="Foto actual del avance: quién sigue, qué falta, qué está bloqueado y qué fue aprobado.">Estado</strong>
+          <strong class="keyword" tabindex="0" data-detail="OK explícito de una persona antes de publicar, tocar sistemas sensibles o asumir una decisión.">Aprobación</strong>
         </div>
 
         <figure class="agent-art-figure contain">
           <img src="assets/agent-art-usage.png" alt="Ilustración renderizada del funcionamiento interno: pedido, bandeja de entrada, correr proceso y próximo agente.">
-          <figcaption>La capa técnica guarda el estado del trabajo para que el próximo agente no tenga que reinterpretar todo.</figcaption>
+          <figcaption>La capa técnica guarda el <strong class="keyword" tabindex="0" data-detail="Foto actual del avance: quién sigue, qué falta, qué está bloqueado y qué fue aprobado.">estado</strong> del trabajo para que el próximo <strong class="keyword" tabindex="0" data-detail="Rol de IA especializado que recibe contexto, ejecuta una parte del trabajo y deja una salida verificable.">agente</strong> no tenga que reinterpretar todo.</figcaption>
         </figure>
 
         <div class="scenario">
           <div class="state-machine" aria-label="Archivos internos">
             <div class="state-line">
-              <code>goal.md</code>
-              <span>Objetivo, alcance, inputs, no-goals y criterios de aceptación.</span>
+              <code class="keyword" tabindex="0" data-detail="Archivo que resume qué se quiere lograr, qué queda fuera y cómo se valida.">goal.md</code>
+              <span><strong class="keyword" tabindex="0" data-detail="Resultado esperado del pedido, con alcance, límites y criterios para saber si está terminado.">Objetivo</strong>, alcance, inputs, no-goals y criterios de aceptación.</span>
             </div>
             <div class="state-line">
-              <code>state.json</code>
-              <span>Flujo activo, agente actual, bloqueos, decisiones y aprobaciones.</span>
+              <code class="keyword" tabindex="0" data-detail="Archivo técnico que guarda el estado actual para que el flujo pueda retomarse.">state.json</code>
+              <span><strong class="keyword" tabindex="0" data-detail="Secuencia de pasos, responsables y decisiones para avanzar sin perder contexto.">Flujo</strong> activo, <strong class="keyword" tabindex="0" data-detail="Rol de IA especializado que recibe contexto, ejecuta una parte del trabajo y deja una salida verificable.">agente</strong> actual, bloqueos, decisiones y aprobaciones.</span>
             </div>
             <div class="state-line">
-              <code>handoffs/</code>
+              <code class="keyword" tabindex="0" data-detail="Carpeta con entregas intermedias: lo que un agente le deja listo al siguiente.">handoffs/</code>
               <span>Salida verificable de cada rol para que el siguiente no reinterprete.</span>
             </div>
             <div class="state-line">
-              <code>evidence/</code>
+              <code class="keyword" tabindex="0" data-detail="Carpeta con pruebas mínimas del avance: links, rutas, comandos y fragmentos relevantes.">evidence/</code>
               <span>Links, paths, comandos y snippets mínimos, sin secretos ni dumps completos.</span>
             </div>
             <div class="state-line">
-              <code>PENDIENTES.md</code>
+              <code class="keyword" tabindex="0" data-detail="Archivo donde quedan las decisiones o bloqueos que requieren intervención humana.">PENDIENTES.md</code>
               <span>Lo que requiere persona, credencial, merge, ambiente o decisión.</span>
             </div>
           </div>
 
-          <div class="terminal" aria-label="Comandos de ejemplo">
-<pre><span># Crear un objetivo desde texto</span>
-python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py \
-  intake --text "identificar error prod en checkout con estos logs..." --mode auto
+          <div class="assistant-screen" aria-label="Pantalla de conversación con Codex o Claude">
+            <div class="screen-top">
+              <div class="screen-dots" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <strong>Codex / Claude conectado a Sky Inbox</strong>
+              <span>ticket + error + deploy</span>
+            </div>
 
-<span># Procesar bandeja y preparar el próximo agente</span>
-python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py run-once
+            <article class="chat-message user">
+              <span class="message-label">Erick</span>
+              <p>
+                Tomá este ticket de Jira. Revisá los repos afectados, buscá si el error aparece en logs,
+                prepará el plan de cambio y dejalo listo para QA. Si para publicar falta aprobación,
+                dejalo marcado antes de seguir.
+              </p>
+            </article>
 
-<span># Ver estado y aprobaciones externas</span>
-python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py status 2026-06-08-error-prod
-python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py approvals</pre>
+            <article class="chat-message assistant">
+              <span class="message-label">Sky Agent OS</span>
+              <p>
+                <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué asistente sigue según el objetivo y el estado actual.">Orbi</strong>
+                clasificó la entrada como ticket + debugging. Activo la <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong>
+                de análisis y paso a <strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong>
+                para separar evidencia, inferencia y decisiones pendientes.
+              </p>
+              <div class="response-grid" aria-label="Resumen de la respuesta del flujo">
+                <div class="response-line">
+                  <strong>Tipo</strong>
+                  <span>ticket Jira con posible impacto productivo</span>
+                </div>
+                <div class="response-line">
+                  <strong>Skill</strong>
+                  <span>refinement, debugging, desarrollo, QA y deploy protegido</span>
+                </div>
+                <div class="response-line">
+                  <strong>Siguiente</strong>
+                  <span>Specter analiza contexto; Planny arma repos, riesgos y validaciones; Buildy implementa solo si el camino está claro.</span>
+                </div>
+                <div class="response-line">
+                  <strong>Freno</strong>
+                  <span>Publicar, mergear o tocar producción requiere OK explícito.</span>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -1294,48 +1510,51 @@ python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py ap
 
     <footer class="footer">
       <p>
-        Sky Agent OS no reemplaza la aprobación humana: organiza el trabajo para que la IA y los
-        asistentes avancen solos donde es seguro, y se detengan cuando hace falta una decisión.
+        Sky Agent OS no reemplaza la aprobación humana: organiza entradas del Sky Inbox para que la IA y los
+        asistentes avancen donde es seguro, y se detengan cuando hace falta una decisión.
       </p>
     </footer>
   </div>
 
   <script>
+    const keyword = (label, detail) =>
+      `<strong class="keyword" tabindex="0" data-detail="${detail}">${label}</strong>`;
+
     const scenarios = {
       prod: {
-        title: 'Problema urgente',
-        copy: 'Traes un síntoma, impacto o captura. Specter busca causas probables antes de que Buildy toque nada.',
+        title: 'Error prod',
+        copy: `Entra un síntoma, alerta, log o impacto de usuario. ${keyword('Specter', 'Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.')} arma evidencia antes de que ${keyword('Buildy', 'Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.')} toque código o ambiente.`,
         items: [
-          'Qué pasó y a quién afecta.',
-          'Qué sabemos, qué suponemos y qué falta decidir.',
-          'Próxima acción clara, sin insistir a ciegas.'
+          'Qué pasó, dónde impacta y qué usuarios afecta.',
+          'Qué dicen logs, dashboards, repos y despliegues recientes.',
+          'Próxima acción clara: investigar, revertir, fixear, validar o escalar.'
         ]
       },
       ticket: {
-        title: 'Nueva iniciativa',
-        copy: 'Traes una idea, solicitud o necesidad de negocio. Specter la aterriza y Planny la convierte en camino de trabajo.',
+        title: 'Ticket Jira',
+        copy: `Entra un ticket de feature, ajuste o deuda técnica. ${keyword('Specter', 'Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.')} lee contexto y ${keyword('Planny', 'Planificador: arma el camino, marca riesgos y ordena el trabajo.')} arma el camino antes de tocar repos.`,
         items: [
-          'Qué problema resuelve.',
-          'Qué partes hay que coordinar.',
-          'Cómo se valida que el resultado sirve.'
+          'Criterios de aceptación, dudas y alcance fuera.',
+          'Repos, servicios, owners y riesgos de integración.',
+          'Plan de implementación, pruebas y salida esperada para QA.'
         ]
       },
       qa: {
-        title: 'Validación',
-        copy: 'Cuando algo ya está construido, Quby revisa el resultado antes de moverlo a otra etapa.',
+        title: 'QA',
+        copy: `Entra una validación pendiente o un reporte de QA. ${keyword('Quby', 'Validador: prueba lo importante y avisa si algo no está listo.')} ordena casos, evidencia y blockers antes de devolver estado.`,
         items: [
-          'Qué hay que probar.',
-          'Qué salió bien.',
-          'Qué queda bloqueado por ambiente, permiso o decisión.'
+          'Qué hay que probar y con qué datos.',
+          'Qué pasó, qué falló y qué evidencia queda.',
+          'Qué queda bloqueado por ambiente, permiso, datos o decisión.'
         ]
       },
       release: {
-        title: 'Entrega',
-        copy: 'Cuando el cambio está listo, Packy arma el resumen para que otra persona pueda aprobar, publicar o continuar.',
+        title: 'Deploy',
+        copy: `Entra un cambio listo para pasar de desarrollo a stage o producción. ${keyword('Packy', 'Encargado de entrega: deja MR, resumen, deploy note o documentación lista para continuar.')} arma el paquete y frena si falta aprobación.`,
         items: [
-          'Qué se entrega.',
-          'Qué decisión falta.',
-          'Qué aprendizaje queda para la próxima vez.'
+          'Qué versión, branch, commit o MR se entrega.',
+          'Qué validación, changelog, doc o rollback aplica.',
+          'Qué aprobación falta para publicar o coordinar ventana.'
         ]
       }
     };
