@@ -491,6 +491,51 @@
       background: var(--red-soft);
     }
 
+    .tech-hint {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 6px;
+      padding: 2px 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      vertical-align: middle;
+      cursor: help;
+    }
+
+    .tech-hint::after {
+      content: attr(data-detail);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 9px);
+      z-index: 30;
+      width: min(320px, 78vw);
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--display);
+      font-size: 13px;
+      line-height: 1.35;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 6px);
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .tech-hint:hover::after,
+    .tech-hint:focus::after {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
     .tabs {
       display: flex;
       flex-wrap: wrap;
@@ -768,41 +813,42 @@
       </div>
       <nav class="nav" aria-label="Secciones">
         <a href="#flujo">Flujo</a>
-        <a href="#agentes">Agentes</a>
-        <a href="#uso">Uso real</a>
+        <a href="#agentes">Equipo</a>
+        <a href="#escenarios">Casos</a>
         <a href="#estado">Estado</a>
+        <a href="#capo">Bajo el capó</a>
       </nav>
     </header>
 
     <main>
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Demo operativa del cockpit</p>
-          <h1>Un equipo de agentes para trabajar Sky sin improvisar.</h1>
+          <p class="eyebrow">Demo para toda la empresa</p>
+          <h1>Un equipo de asistentes para convertir pedidos en trabajo claro.</h1>
           <p>
-            Convierte solicitudes, errores, registros o mensajes sueltos en objetivos ejecutables con
-            descubrimiento, plan, implementación, QA, revisión, aprobaciones externas, memoria y pendientes accionables.
+            Sky Agent OS toma una necesidad, problema o idea, la ordena, reparte el trabajo,
+            pide ayuda cuando hace falta y deja una entrega lista para revisar.
           </p>
           <div class="hero-actions">
-            <a class="button" href="#uso">Ver cómo se usa</a>
-            <a class="button secondary" href="#pendientes">Qué falta</a>
+            <a class="button" href="#flujo">Ver el flujo</a>
+            <a class="button secondary" href="#agentes">Conocer al equipo</a>
           </div>
         </div>
 
         <aside class="hero-visual" aria-label="Ilustración del flujo Sky Agent OS">
-          <img src="assets/agent-art-flow.png" alt="Ilustración renderizada: errores, solicitudes y registros pasan por una máquina hacia objetivo, estado y traspaso.">
+          <img src="assets/agent-art-company-flow.png" alt="Ilustración renderizada: pedido, problema e idea se transforman en claridad, plan, trabajo, validación y entrega.">
           <div class="hero-status">
             <div class="status-cell">
               <strong>Entrada</strong>
-              <span>texto, registros, Jira, inbox</span>
+              <span>necesidad, problema o idea</span>
             </div>
             <div class="status-cell">
-              <strong>Control</strong>
-              <span>estado + gates + traspasos</span>
+              <strong>Orden</strong>
+              <span>claridad, plan y responsables</span>
             </div>
             <div class="status-cell">
               <strong>Salida</strong>
-              <span>código, QA, drafts, pendientes</span>
+              <span>siguiente paso y entrega</span>
             </div>
           </div>
         </aside>
@@ -810,48 +856,50 @@
 
       <section id="flujo" class="band white">
         <div class="section-head">
-          <h2>Cómo funciona</h2>
+          <h2>De pedido a entrega</h2>
           <p>
-            El sistema no intenta resolver todo de golpe. Primero transforma la entrada cruda en un
-            goal con estado, después delega roles y se detiene ante aprobaciones o bloqueos reales.
+            La primera capa es simple: entender qué se necesita, ordenar el trabajo,
+            avanzar con responsables claros y detenerse cuando haga falta una decisión humana.
           </p>
         </div>
 
         <figure class="agent-art-figure contain">
-          <img src="assets/agent-art-flow.png" alt="Ilustración renderizada del intake con textos en español: error, solicitud, registros, objetivo, estado y traspaso.">
-          <figcaption>El intake transforma entrada cruda en objetivo, estado y traspasos sin perder memoria ni bloquearse a ciegas.</figcaption>
+          <img src="assets/agent-art-usage-simple.png" alt="Ilustración renderizada: una necesidad se prioriza, se hace, se revisa y termina en siguiente paso o entrega.">
+          <figcaption>Una necesidad entra, se prioriza, se trabaja, se revisa y vuelve como aprendizaje para la próxima vez.</figcaption>
         </figure>
 
         <div class="flow-board" aria-label="Flujo operativo">
           <article class="flow-step">
             <small>01</small>
-            <strong>Entrada cruda</strong>
-            <p>Pegas un error, solicitud o contexto, o dejas un archivo en `_inbox/`.</p>
+            <strong>Recibir</strong>
+            <p>Llega una necesidad, un problema, una idea o una pregunta.</p>
           </article>
           <article class="flow-step">
             <small>02</small>
-            <strong>Intake</strong>
-            <p>Clasifica modo, crea slug, copia template y guarda evidencia inicial.</p>
+            <strong>Aclarar</strong>
+            <p>Se separa lo importante de lo accesorio y se define qué significa éxito.</p>
           </article>
           <article class="flow-step">
             <small>03</small>
-            <strong>Goal folder</strong>
-            <p>Queda `goal.md`, `state.json`, handoffs, evidencia y `PENDIENTES.md`.</p>
+            <strong>Planear</strong>
+            <p>Planny propone camino, riesgos y orden de trabajo.</p>
           </article>
           <article class="flow-step">
             <small>04</small>
-            <strong>Orquestación</strong>
-            <p>El runner decide el próximo agente y corta si falta una decisión humana.</p>
+            <strong>Hacer</strong>
+            <p>Buildy avanza solo donde es seguro y marca lo que requiere acuerdo.</p>
           </article>
           <article class="flow-step">
             <small>05</small>
-            <strong>Ejecución</strong>
-            <p>Agentes especializados hacen descubrimiento, plan, desarrollo, QA, revisión y entrega.</p>
+            <strong>Revisar</strong>
+            <p>Quby y Revi verifican que el resultado tenga sentido antes de mostrarlo.</p>
           </article>
           <article class="flow-step">
             <small>06</small>
             <strong>Cierre</strong>
-            <p>Entrega evidencia, drafts externos, pendientes y mejoras candidatas al sistema.</p>
+            <p>Packy deja una entrega, próximos pasos y aprendizajes para el equipo.
+              <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se guarda en una carpeta retomable con objetivo, estado, salidas por rol y decisiones pendientes.">detalle</span>
+            </p>
           </article>
         </div>
       </section>
@@ -860,33 +908,33 @@
         <div class="section-head">
           <h2>Qué mejora del flujo anterior</h2>
           <p>
-            Antes el orden vivía en la conversación. Ahora el orden vive en archivos retomables:
-            si cambias de thread, el próximo agente puede reconstruir el estado sin adivinar.
+            Antes cada conversación podía convertirse en una pila de mensajes. Ahora cada pedido
+            queda ordenado, retomable y con una persona o asistente responsable del próximo paso.
           </p>
         </div>
 
         <figure class="agent-art-figure contain">
-          <img src="assets/agent-art-before-after.png" alt="Ilustración renderizada antes y ahora: caos de conversación frente a carpeta de objetivo ordenada.">
-          <figcaption>Antes el sistema dependía del hilo activo; ahora el objetivo queda empaquetado para retomarlo sin adivinar.</figcaption>
+          <img src="assets/agent-art-before-after-company.png" alt="Ilustración renderizada antes y ahora: mensajes, dudas, capturas y pedidos pasan a objetivo, decisión y siguiente paso.">
+          <figcaption>Antes el avance dependía de recordar la conversación; ahora queda empaquetado para retomarlo sin adivinar.</figcaption>
         </figure>
 
         <div class="split">
           <article class="panel">
             <div class="panel-header">ANTES</div>
             <div class="panel-body">
-              <h3>Trabajo dependiente del hilo</h3>
+              <h3>Trabajo dependiente de la conversación</h3>
               <p>El contexto, las decisiones, los bloqueos y los siguientes pasos quedaban mezclados en conversación.</p>
               <div class="comparison">
                 <div class="comparison-row">
                   <strong>Orden</strong>
-                  <span>Manual, recordado por el desarrollador o por el hilo activo.</span>
+                  <span>Manual, recordado por una persona o por la conversación activa.</span>
                 </div>
                 <div class="comparison-row">
                   <strong>Bloqueos</strong>
-                  <span>Riesgo de brute force si el error reaparece.</span>
+                  <span>Riesgo de insistir sobre el mismo problema sin una nueva decisión.</span>
                 </div>
                 <div class="comparison-row">
-                  <strong>QA</strong>
+                  <strong>Revisión</strong>
                   <span>Dependía de que alguien pidiera explícitamente el siguiente paso.</span>
                 </div>
               </div>
@@ -897,19 +945,19 @@
             <div class="panel-header">AHORA</div>
             <div class="panel-body">
               <h3>Trabajo gobernado por objetivo</h3>
-              <p>Cada ejecución tiene contratos, gates, estado, traspasos y evidencia sanitizada.</p>
+              <p>Cada pedido queda convertido en un objetivo claro, con responsables y frenos visibles.</p>
               <div class="comparison">
                 <div class="comparison-row">
                   <strong>Orden</strong>
-                  <span>Flow elegido por `active_flow` y próximo rol definido en `state.json`.</span>
+                  <span>Orbi sabe qué viene después y a quién llamar.</span>
                 </div>
                 <div class="comparison-row">
                   <strong>Bloqueos</strong>
                   <span>Máximo dos intentos por clase de error; al tercero se registra pendiente.</span>
                 </div>
                 <div class="comparison-row">
-                  <strong>QA</strong>
-                  <span>QA local, QA desplegado y entrega son fases explícitas.</span>
+                  <strong>Revisión</strong>
+                  <span>La revisión queda como etapa natural, no como pedido tardío.</span>
                 </div>
               </div>
             </div>
@@ -919,124 +967,120 @@
 
       <section id="agentes" class="band white">
         <div class="section-head">
-          <h2>Equipo de agentes</h2>
+          <h2>El equipo</h2>
           <p>
-            Cada agente tiene input, output, gates, stop conditions y handoff. No son prompts vagos:
-            son contratos operativos para producir artefactos verificables.
+            Para que la demo sea fácil de recordar, cada asistente tiene nombre, accesorio y una misión.
+            Orbi coordina; los demás resuelven una parte concreta del trabajo.
           </p>
         </div>
 
         <figure class="agent-art-figure contain">
-          <img src="assets/agent-art-agents.png" alt="Ilustración renderizada del equipo de agentes con labels en español: contexto, plan, desarrollo, QA, revisión y entrega.">
-          <figcaption>El orquestador reparte trabajo acotado: cada rol produce evidencia y deja el siguiente traspaso listo.</figcaption>
+          <img src="assets/agent-art-named-agents.png" alt="Ilustración renderizada del equipo: Orbi, Specter, Planny, Buildy, Quby, Revi, Packy y Memo con accesorios distintos.">
+          <figcaption>La misma silueta, distinto gorrito: cada asistente se reconoce rápido y cumple una misión concreta.</figcaption>
         </figure>
 
         <div class="agent-grid">
           <article class="agent-tile">
             <span class="tag blue">control</span>
-            <strong>orchestrator</strong>
-            <p>Lee el goal, elige flujo, mantiene `state.json`, asigna roles y decide cuándo detener.</p>
+            <strong>Orbi</strong>
+            <p>Coordina el trabajo, decide quién sigue y frena si falta una decisión humana.
+              <span class="tech-hint" tabindex="0" data-detail="Rol interno: orquestador. Decide el próximo paso con el estado guardado del objetivo.">detalle</span>
+            </p>
           </article>
           <article class="agent-tile">
             <span class="tag orange">contexto</span>
-            <strong>descubrimiento de contexto</strong>
-            <p>Descubre repos, docs, skills, logs y separa evidencia de inferencia.</p>
-          </article>
-          <article class="agent-tile">
-            <span class="tag red">criterios</span>
-            <strong>refinement-agent</strong>
-            <p>Detecta ambigüedades, riesgos, decisiones humanas y criterios de éxito.</p>
+            <strong>Specter</strong>
+            <p>Convierte una idea vaga en una definición entendible, con preguntas y criterios de éxito.</p>
           </article>
           <article class="agent-tile">
             <span class="tag blue">plan</span>
-            <strong>planner-agent</strong>
-            <p>Define repos, archivos, orden de ejecución, gates y aceptación.</p>
+            <strong>Planny</strong>
+            <p>Arma el camino, marca riesgos y decide el orden más razonable.</p>
           </article>
           <article class="agent-tile">
             <span class="tag green">desarrollo</span>
-            <strong>implementer-agent</strong>
-            <p>Implementa sin pisar cambios ajenos y con ownership claro por repo.</p>
+            <strong>Buildy</strong>
+            <p>Hace el cambio con cuidado y respeta lo que ya estaba en curso.</p>
           </article>
           <article class="agent-tile">
             <span class="tag green">validación</span>
-            <strong>validador y revisor</strong>
-            <p>Corre checks aplicables y revisa riesgos de contratos, arquitectura y tests.</p>
+            <strong>Quby</strong>
+            <p>Prueba lo importante y avisa si algo todavía no está listo.</p>
           </article>
           <article class="agent-tile">
-            <span class="tag blue">qa</span>
-            <strong>QA local</strong>
-            <p>Prueba lo razonable en local sin quemar tiempo levantando todo.</p>
+            <span class="tag blue">revisión</span>
+            <strong>Revi</strong>
+            <p>Mira el resultado con ojo crítico antes de que salga a otros equipos.</p>
           </article>
           <article class="agent-tile">
-            <span class="tag orange">QA desplegado</span>
-            <strong>QA desplegado</strong>
-            <p>Valida en QA post-merge con curls, pods, Chrome o e2e cuando aplica.</p>
-          </article>
-          <article class="agent-tile">
-            <span class="tag red">externo</span>
-            <strong>traspaso de entrega</strong>
-            <p>Prepara MR, changelog, documento de despliegue y borradores Jira sin publicar sin aprobación.</p>
+            <span class="tag orange">entrega</span>
+            <strong>Packy</strong>
+            <p>Prepara la entrega, el resumen y lo que otra persona necesita para continuar.</p>
           </article>
           <article class="agent-tile">
             <span class="tag green">memoria</span>
-            <strong>memory-improvement</strong>
-            <p>Registra aprendizajes y propone mejoras a skills sin modificar reglas estables sin OK.</p>
+            <strong>Memo</strong>
+            <p>Guarda aprendizajes para que la próxima corrida empiece mejor.
+              <span class="tech-hint" tabindex="0" data-detail="Rol interno: mejora de memoria y skills, siempre con cuidado de no cambiar reglas estables sin aprobación.">detalle</span>
+            </p>
           </article>
         </div>
       </section>
 
-      <section class="band soft">
+      <section id="escenarios" class="band soft">
         <div class="section-head">
           <h2>Escenarios soportados</h2>
           <p>
-            Puedes pedirlo directo a Codex o dejar el material en el goal folder. El flujo se elige
-            por intención y evidencia, no por una palabra mágica.
+            La entrada puede venir desde producto, soporte, tecnología, diseño o dirección.
+            Lo importante es la intención: resolver, construir, validar o preparar una entrega.
           </p>
         </div>
 
         <figure class="agent-art-figure contain">
-          <img src="assets/agent-art-scenarios.png" alt="Ilustración renderizada de escenarios: error, ticket, QA y entrega entran a un enrutador de objetivos.">
-          <figcaption>Un error productivo, una solicitud de desarrollo, un QA o una entrega usan la misma estructura con flujos distintos.</figcaption>
+          <img src="assets/agent-art-scenarios-company.png" alt="Ilustración renderizada de escenarios: problema, idea, validación y entrega entran a un organizador y salen como por decidir, en curso, por revisar y hecho.">
+          <figcaption>Un problema, una solicitud, una validación o una entrega usan la misma estructura de trabajo.</figcaption>
         </figure>
 
-        <div class="tabs" role="tablist" aria-label="Escenarios de goal">
-          <button class="tab-button" type="button" role="tab" aria-selected="true" data-scenario="prod">Error en prod</button>
-          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="ticket">Ticket completo</button>
-          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="qa">QA desplegado</button>
-          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="release">Traspaso de entrega</button>
+        <div class="tabs" role="tablist" aria-label="Escenarios de trabajo">
+          <button class="tab-button" type="button" role="tab" aria-selected="true" data-scenario="prod">Problema urgente</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="ticket">Nueva iniciativa</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="qa">Validación</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-scenario="release">Entrega</button>
         </div>
 
         <div class="scenario">
           <article class="scenario-text" id="scenario-copy">
-            <h3>Error en prod</h3>
-            <p>Pegas registros, síntoma, capturas o DQL. El sistema arranca en flujo de incidente.</p>
+            <h3>Problema urgente</h3>
+            <p>Se trae un síntoma, impacto o captura. Specter busca causas probables antes de que Buildy toque nada.</p>
             <ul class="scenario-list">
-              <li>Separa repo/path/log/desplegado/inferencia.</li>
-              <li>Genera hipótesis verificables antes de tocar código.</li>
-              <li>Si requiere credencial, ambiente o decisión, lo registra en `PENDIENTES.md`.</li>
+              <li>Qué pasó y a quién afecta.</li>
+              <li>Qué sabemos, qué suponemos y qué falta decidir.</li>
+              <li>Próxima acción clara, sin insistir a ciegas.</li>
             </ul>
           </article>
 
-          <div class="state-machine" aria-label="Estado del goal">
+          <div class="state-machine" aria-label="Qué ve una persona">
             <div class="state-line">
-              <code>goal.md</code>
-              <span>Objetivo, alcance, inputs, no-goals y criterios de aceptación.</span>
+              <code>1</code>
+              <span>El pedido queda resumido en una frase clara.</span>
             </div>
             <div class="state-line">
-              <code>state.json</code>
-              <span>Flow activo, agente actual, gates, decisiones, bloqueos y aprobaciones.</span>
+              <code>2</code>
+              <span>El equipo sabe quién sigue y qué resultado debe producir.</span>
             </div>
             <div class="state-line">
-              <code>handoffs/</code>
-              <span>Salida verificable de cada agente para que el siguiente no reinterprete.</span>
+              <code>3</code>
+              <span>Las decisiones humanas aparecen como decisiones, no como fallas.</span>
             </div>
             <div class="state-line">
-              <code>evidence/</code>
-              <span>Links, paths, comandos y snippets mínimos, sin secretos ni dumps completos.</span>
+              <code>4</code>
+              <span>La entrega se puede explicar a otra área sin reconstruir toda la conversación.</span>
             </div>
             <div class="state-line">
-              <code>PENDIENTES.md</code>
-              <span>Lo que no se brute-forcea: impacto, causa, próximo paso y si requiere humano.</span>
+              <code>5</code>
+              <span>El aprendizaje queda disponible para la próxima vez.
+                <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se traduce a objetivo, estado de ejecución, salidas por rol, evidencias mínimas y pendientes accionables.">detalle</span>
+              </span>
             </div>
           </div>
         </div>
@@ -1044,48 +1088,51 @@
 
       <section id="uso" class="band white">
         <div class="section-head">
-          <h2>Uso real</h2>
+          <h2>Cómo se usaría en una reunión</h2>
           <p>
-            La operación puede iniciar desde Codex con una frase natural o desde un archivo en
-            `_inbox/`. El runner prepara el próximo prompt de agente y corta ante approvals.
+            No hace falta explicar la mecánica interna. Para una demo, alcanza con mostrar
+            una necesidad real y cómo el equipo la convierte en próximos pasos.
           </p>
         </div>
 
-        <figure class="agent-art-figure contain">
-          <img src="assets/agent-art-usage.png" alt="Ilustración renderizada del uso real: pedido, inbox, correr y próximo agente.">
-          <figcaption>La operación puede arrancar desde una frase natural, desde `_inbox/` o desde un comando conservador.</figcaption>
-        </figure>
-
         <div class="split">
-          <div class="terminal" aria-label="Comandos de ejemplo">
-<pre><span># Crear un goal desde texto</span>
-python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py \
-  intake --text "identificar error prod en checkout con estos logs..." --mode auto
-
-<span># Procesar inbox y preparar el próximo agente</span>
-python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py run-once
-
-<span># Ver estado y approvals externas</span>
-python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py status 2026-06-08-error-prod
-python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py approvals</pre>
-          </div>
-
           <article class="panel">
-            <div class="panel-header">También puedes pedirlo directo</div>
+            <div class="panel-header">Entrada humana</div>
             <div class="panel-body">
-              <h3>Ejemplos de entrada natural</h3>
+              <h3>Frases que cualquiera puede decir</h3>
               <div class="comparison">
                 <div class="comparison-row">
-                  <strong>Bug</strong>
-                  <span>“Genera un sky-goal para identificar este error en prod.”</span>
+                  <strong>Problema</strong>
+                  <span>“Tenemos este problema afectando la venta online, ¿qué hacemos primero?”</span>
                 </div>
                 <div class="comparison-row">
-                  <strong>Ticket</strong>
-                  <span>“Desarrolla por completo VC-1234 y deja QA plan + handoff.”</span>
+                  <strong>Idea</strong>
+                  <span>“Queremos mejorar este flujo, pero no sabemos por dónde partir.”</span>
                 </div>
                 <div class="comparison-row">
-                  <strong>Log suelto</strong>
-                  <span>“Te pego este error: pregúntame si quiero analizarlo, corregirlo o crear goal.”</span>
+                  <strong>Entrega</strong>
+                  <span>“Esto ya está avanzado, prepará lo necesario para mostrarlo y validar.”</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">Respuesta esperada</div>
+            <div class="panel-body">
+              <h3>Lo que devuelve el sistema</h3>
+              <div class="comparison">
+                <div class="comparison-row">
+                  <strong>Claridad</strong>
+                  <span>Qué se quiere lograr y qué queda fuera.</span>
+                </div>
+                <div class="comparison-row">
+                  <strong>Plan</strong>
+                  <span>Quién toma cada parte y qué se revisa antes de avanzar.</span>
+                </div>
+                <div class="comparison-row">
+                  <strong>Decisión</strong>
+                  <span>Si falta prioridad, permiso o fecha, se pide OK en vez de insistir.</span>
                 </div>
               </div>
             </div>
@@ -1097,45 +1144,47 @@ python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py ap
         <div class="section-head">
           <h2>Qué cumple hoy</h2>
           <p>
-            Esto ya no es solo una carpeta de Markdown: hay contratos, templates, runner, intake,
-            approvals y un wrapper de skill para operar desde Codex.
+            La versión actual ya ordena trabajo, reparte responsabilidades, valida avances
+            y deja decisiones humanas visibles antes de publicar o tocar sistemas externos.
           </p>
         </div>
 
         <figure class="agent-art-figure contain">
           <img src="assets/agent-art-status-pending.png" alt="Ilustración renderizada de estado, semáforo, pendientes y pedir OK.">
-          <figcaption>El estado y los gates permiten avanzar; los bloqueos reales van a pendientes en vez de repetirse sin límite.</figcaption>
+          <figcaption>Cuando el camino está claro, avanza. Cuando falta una decisión, pide OK y no insiste.</figcaption>
         </figure>
 
         <div class="capability-grid">
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Carpeta canónica</h3>
-            <p>`sky-agent-os/` contiene modelo operativo, agentes, flujos, contratos, prompts, hooks, automation y piloto.</p>
+            <h3>Trabajo ordenado</h3>
+            <p>Cada pedido queda con objetivo, alcance y siguiente paso visible.
+              <span class="tech-hint" tabindex="0" data-detail="Implementación: carpeta sky-agent-os con modelo operativo, agentes, flujos, contratos, prompts y piloto.">detalle</span>
+            </p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Runtime de goals</h3>
-            <p>`07-goals/&lt;fecha-slug&gt;/` queda preparado con `goal.md`, `state.json`, evidencia, handoffs y pendientes.</p>
+            <h3>Continuidad</h3>
+            <p>Otro asistente puede retomar sin depender de recordar toda la conversación anterior.</p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Intake automático</h3>
-            <p>Puede crear objetivos desde texto, archivo o `_inbox/` y clasificar solicitud, error, QA, entrega o docs.</p>
+            <h3>Clasificación inicial</h3>
+            <p>Detecta si lo que llegó es problema, iniciativa, validación, entrega o documentación.</p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Runner conservador</h3>
-            <p>`run-once` valida queue, encuentra el siguiente agente y se detiene si hay bloqueo o approval externa.</p>
+            <h3>Avance conservador</h3>
+            <p>Busca el próximo responsable y se detiene si hay bloqueo o aprobación externa.</p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Política externa</h3>
-            <p>GitLab push permitido; Jira write requiere draft + OK; Jira delete está prohibido.</p>
+            <h3>Reglas de publicación</h3>
+            <p>Puede preparar borradores y entregas, pero no publica en herramientas sensibles sin OK.</p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
-            <h3>Anti-bruteforce</h3>
+            <h3>No insistir a ciegas</h3>
             <p>Errores repetidos se diagnostican y se registran como pendientes accionables, no como loops infinitos.</p>
           </article>
         </div>
@@ -1145,14 +1194,14 @@ python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py ap
         <div class="section-head">
           <h2>Qué queda pendiente</h2>
           <p>
-            El sistema ya puede orquestar y preparar trabajo. Lo que queda no se fuerza: se anota,
-            se pide aprobación o se configura con conectores reales.
+            Lo pendiente no se esconde ni se fuerza. Se transforma en una decisión clara:
+            prioridad, permiso, fecha, responsable o validación humana.
           </p>
         </div>
 
         <figure class="agent-art-figure contain">
-          <img src="assets/agent-art-status-pending.png" alt="Ilustración renderizada de pendientes y aprobaciones humanas.">
-          <figcaption>Lo externo o incierto se registra: qué pasó, impacto, próximo paso y si requiere una persona, credencial, merge o ambiente.</figcaption>
+          <img src="assets/agent-art-human-decisions.png" alt="Ilustración renderizada: prioridad, permiso y fecha desbloquean lo acordado y en marcha.">
+          <figcaption>Cuando falta prioridad, permiso o fecha, el sistema pide decisión humana y no insiste por su cuenta.</figcaption>
         </figure>
 
         <table class="pending-table">
@@ -1165,35 +1214,88 @@ python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py ap
           </thead>
           <tbody>
             <tr>
-              <td><strong>Automation Codex</strong></td>
-              <td>El prompt y `run-once` están listos; la automation debe quedar aprobada por el usuario.</td>
-              <td>Aprobar la automation “Sky Agent OS Goal Runner” cuando quieras activarla.</td>
+              <td><strong>Activación</strong></td>
+              <td>El flujo está preparado, pero correrlo automáticamente requiere aprobación.</td>
+              <td>Decidir cuándo activarlo para trabajo real.</td>
             </tr>
             <tr>
-              <td><strong>Jira write</strong></td>
-              <td>El sistema genera drafts y approvals; no escribe sin OK.</td>
-              <td>Configurar executor/conector seguro o usar draft manual después de aprobar.</td>
+              <td><strong>Herramientas externas</strong></td>
+              <td>Puede preparar borradores, pero no escribir en sistemas sensibles sin OK.</td>
+              <td>Definir qué herramientas puede tocar solo y cuáles requieren revisión.</td>
             </tr>
             <tr>
-              <td><strong>MR/Confluence/Docs externos</strong></td>
-              <td>Se preparan handoffs; publicación externa queda gated.</td>
-              <td>Agregar executor por herramienta cuando el flujo demuestre estabilidad.</td>
+              <td><strong>Publicaciones</strong></td>
+              <td>La entrega se puede preparar, pero la publicación final queda protegida.</td>
+              <td>Acordar responsables para publicar, aprobar o devolver cambios.</td>
             </tr>
             <tr>
               <td><strong>Piloto real</strong></td>
-              <td>El piloto está definido, pero aún falta correrlo con un ticket chico.</td>
-              <td>Elegir un ticket simple o bug controlado y ejecutar la primera corrida completa.</td>
+              <td>Falta probarlo con un caso chico, representativo y de bajo riesgo.</td>
+              <td>Elegir el primer caso y medir si ahorra tiempo de verdad.</td>
             </tr>
           </tbody>
         </table>
+      </section>
+
+      <section id="capo" class="band soft">
+        <div class="section-head">
+          <h2>Bajo el capó</h2>
+          <p>
+            Esta parte es para tecnología o para quienes quieran entender cómo se conserva continuidad
+            entre corridas, asistentes y herramientas.
+          </p>
+        </div>
+
+        <figure class="agent-art-figure contain">
+          <img src="assets/agent-art-usage.png" alt="Ilustración renderizada del funcionamiento interno: pedido, bandeja de entrada, correr proceso y próximo agente.">
+          <figcaption>La capa técnica guarda el estado del trabajo para que el próximo agente no tenga que reinterpretar todo.</figcaption>
+        </figure>
+
+        <div class="scenario">
+          <div class="state-machine" aria-label="Archivos internos">
+            <div class="state-line">
+              <code>goal.md</code>
+              <span>Objetivo, alcance, inputs, no-goals y criterios de aceptación.</span>
+            </div>
+            <div class="state-line">
+              <code>state.json</code>
+              <span>Flujo activo, agente actual, bloqueos, decisiones y aprobaciones.</span>
+            </div>
+            <div class="state-line">
+              <code>handoffs/</code>
+              <span>Salida verificable de cada rol para que el siguiente no reinterprete.</span>
+            </div>
+            <div class="state-line">
+              <code>evidence/</code>
+              <span>Links, paths, comandos y snippets mínimos, sin secretos ni dumps completos.</span>
+            </div>
+            <div class="state-line">
+              <code>PENDIENTES.md</code>
+              <span>Lo que requiere persona, credencial, merge, ambiente o decisión.</span>
+            </div>
+          </div>
+
+          <div class="terminal" aria-label="Comandos de ejemplo">
+<pre><span># Crear un objetivo desde texto</span>
+python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py \
+  intake --text "identificar error prod en checkout con estos logs..." --mode auto
+
+<span># Procesar bandeja y preparar el próximo agente</span>
+python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py run-once
+
+<span># Ver estado y aprobaciones externas</span>
+python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py status 2026-06-08-error-prod
+python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py approvals</pre>
+          </div>
+        </div>
       </section>
 
     </main>
 
     <footer class="footer">
       <p>
-        Sky Agent OS no reemplaza la aprobación humana: organiza el trabajo para que Codex y los
-        agentes avancen solos donde es seguro, y se detengan con evidencia cuando hace falta una decisión.
+        Sky Agent OS no reemplaza la aprobación humana: organiza el trabajo para que la IA y los
+        asistentes avancen solos donde es seguro, y se detengan cuando hace falta una decisión.
       </p>
     </footer>
   </div>
@@ -1201,39 +1303,39 @@ python3 SkyWorkflow/05-skills-tools-mcps/sky-agent-os/scripts/sky_agent_os.py ap
   <script>
     const scenarios = {
       prod: {
-        title: 'Error en prod',
-        copy: 'Pegas registros, síntoma, capturas o DQL. El sistema arranca en flujo de incidente.',
+        title: 'Problema urgente',
+        copy: 'Traes un síntoma, impacto o captura. Specter busca causas probables antes de que Buildy toque nada.',
         items: [
-          'Separa repo/path/log/desplegado/inferencia.',
-          'Genera hipótesis verificables antes de tocar código.',
-          'Si requiere credencial, ambiente o decisión, lo registra en `PENDIENTES.md`.'
+          'Qué pasó y a quién afecta.',
+          'Qué sabemos, qué suponemos y qué falta decidir.',
+          'Próxima acción clara, sin insistir a ciegas.'
         ]
       },
       ticket: {
-        title: 'Ticket completo',
-        copy: 'Das un Jira, especificación o descripción. El sistema arranca descubrimiento, refinamiento, plan e implementación.',
+        title: 'Nueva iniciativa',
+        copy: 'Traes una idea, solicitud o necesidad de negocio. Specter la aterriza y Planny la convierte en camino de trabajo.',
         items: [
-          'Identifica repos y ownership antes de editar.',
-          'Genera plan técnico con gates y aceptación.',
-          'Deja plan de QA, evidencia y traspaso de entrega cuando corresponde.'
+          'Qué problema resuelve.',
+          'Qué partes hay que coordinar.',
+          'Cómo se valida que el resultado sirve.'
         ]
       },
       qa: {
-        title: 'QA desplegado',
-        copy: 'Después del merge/despliegue manual, el objetivo pasa a QA desplegado.',
+        title: 'Validación',
+        copy: 'Cuando algo ya está construido, Quby revisa el resultado antes de moverlo a otra etapa.',
         items: [
-          'Usa curls, pods, logs, Chrome o e2e según el caso.',
-          'No consume tiempo levantando ambientes que no están listos.',
-          'Registra restricciones de ambiente como pendientes accionables.'
+          'Qué hay que probar.',
+          'Qué salió bien.',
+          'Qué queda bloqueado por ambiente, permiso o decisión.'
         ]
       },
       release: {
-        title: 'Traspaso de entrega',
-        copy: 'Cuando el cambio está validado, prepara lo necesario para publicar sin hacerlo a ciegas.',
+        title: 'Entrega',
+        copy: 'Cuando el cambio está listo, Packy arma el resumen para que otra persona pueda aprobar, publicar o continuar.',
         items: [
-          'Changelog, versión, MR, documento de despliegue y borradores Jira.',
-          'GitLab push puede ejecutarse si está dentro de policy.',
-          'Jira/MR/Confluence requieren aprobación antes de escribir o publicar.'
+          'Qué se entrega.',
+          'Qué decisión falta.',
+          'Qué aprendizaje queda para la próxima vez.'
         ]
       }
     };
