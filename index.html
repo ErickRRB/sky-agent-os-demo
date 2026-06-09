@@ -288,6 +288,10 @@
       font-size: 18px;
     }
 
+    .section-head.spaced {
+      margin-top: 34px;
+    }
+
     .flow-board {
       display: grid;
       grid-template-columns: repeat(6, minmax(135px, 1fr));
@@ -456,6 +460,137 @@
     }
 
     .agent-tile p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .operational-map {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .map-row {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.8fr) minmax(190px, 1fr) minmax(190px, 1fr) minmax(220px, 1.15fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .map-row.header .map-cell {
+      min-height: auto;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .map-cell {
+      min-width: 0;
+      min-height: 118px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .map-cell::before {
+      display: none;
+      content: attr(data-label);
+      margin-bottom: 6px;
+      color: var(--orange);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .map-cell strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink);
+    }
+
+    .map-cell p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .journey-board {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(158px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .journey-step {
+      position: relative;
+      min-width: 158px;
+      min-height: 176px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .journey-step::after {
+      content: "";
+      position: absolute;
+      top: 30px;
+      right: -12px;
+      width: 20px;
+      height: 2px;
+      background: var(--orange);
+    }
+
+    .journey-step:last-child::after {
+      display: none;
+    }
+
+    .journey-step small {
+      display: block;
+      color: var(--orange);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .journey-step strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 18px;
+    }
+
+    .journey-step p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .context-card {
+      min-height: 132px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .context-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    .context-card p {
       margin: 0;
       color: var(--muted);
       font-size: 14px;
@@ -918,8 +1053,21 @@
       }
 
       .capability-grid,
+      .context-grid,
       .split {
         grid-template-columns: 1fr;
+      }
+
+      .map-row {
+        grid-template-columns: 1fr;
+      }
+
+      .map-row.header {
+        display: none;
+      }
+
+      .map-cell::before {
+        display: block;
       }
     }
 
@@ -989,6 +1137,7 @@
         <a href="#flujo">Flujo</a>
         <a href="#agentes">Equipo</a>
         <a href="#escenarios">Casos</a>
+        <a href="#v2">V2</a>
         <a href="#estado">Estado</a>
         <a href="#capo">Bajo el capó</a>
       </nav>
@@ -1054,7 +1203,7 @@
           <article class="flow-step">
             <small>03</small>
             <strong>Analizar</strong>
-            <p><strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong> separa evidencia de inferencia y deja claro qué falta confirmar.</p>
+            <p><strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong> separa hechos de hipótesis y deja claro qué falta confirmar.</p>
           </article>
           <article class="flow-step">
             <small>04</small>
@@ -1102,7 +1251,7 @@
                 </div>
                 <div class="comparison-row">
                   <strong>Bloqueos</strong>
-                  <span>Riesgo de repetir la misma prueba, el mismo push o la misma query sin nueva evidencia.</span>
+                  <span>Riesgo de repetir la misma prueba, el mismo push o la misma query sin datos nuevos.</span>
                 </div>
                 <div class="comparison-row">
                   <strong>Revisión</strong>
@@ -1161,7 +1310,7 @@
           <article class="agent-tile">
             <span class="tag orange">contexto</span>
             <strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong>
-            <p>Lee tickets, logs, repos y contexto para separar evidencia, inferencia y preguntas abiertas.</p>
+            <p>Lee tickets, logs, repos y contexto para separar hechos, hipótesis y preguntas abiertas.</p>
           </article>
           <article class="agent-tile">
             <span class="tag blue">plan</span>
@@ -1186,7 +1335,7 @@
           <article class="agent-tile">
             <span class="tag orange">entrega</span>
             <strong class="keyword" tabindex="0" data-detail="Encargado de entrega: deja MR, resumen, deploy note o documentación lista para continuar.">Packy</strong>
-            <p>Prepara MR, resumen, release notes, doc de deploy o handoff para producción.</p>
+            <p>Prepara MR, resumen, release notes, doc de deploy o paso a producción.</p>
           </article>
           <article class="agent-tile">
             <span class="tag green">memoria</span>
@@ -1222,7 +1371,7 @@
         <div class="scenario">
           <article class="scenario-text" id="scenario-copy">
             <h3>Error prod</h3>
-            <p>Entra un síntoma, alerta, log o impacto de usuario. <strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong> arma evidencia antes de que <strong class="keyword" tabindex="0" data-detail="Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.">Buildy</strong> toque código o ambiente.</p>
+            <p>Entra un síntoma, alerta, log o impacto de usuario. <strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong> arma contexto antes de que <strong class="keyword" tabindex="0" data-detail="Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.">Buildy</strong> toque código o ambiente.</p>
             <ul class="scenario-list">
               <li>Qué pasó, dónde impacta y qué usuarios afecta.</li>
               <li>Qué dicen logs, dashboards, repos y despliegues recientes.</li>
@@ -1241,7 +1390,7 @@
             </div>
             <div class="state-line">
               <code>3</code>
-              <span>Logs, dashboards, cambios recientes y repos quedan separados por evidencia e inferencia.</span>
+              <span>Logs, dashboards, cambios recientes y repos quedan separados por hechos e hipótesis.</span>
             </div>
             <div class="state-line">
               <code>4</code>
@@ -1250,10 +1399,179 @@
             <div class="state-line">
               <code>5</code>
               <span>Si hay que tocar producción, queda como decisión humana antes de avanzar.
-                <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se traduce a objetivo, estado de ejecución, salidas por rol, evidencias mínimas y pendientes accionables.">detalle</span>
+                <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se traduce a objetivo, estado de ejecución, salidas por rol, datos mínimos y pendientes accionables.">detalle</span>
               </span>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="v2" class="band white">
+        <div class="section-head">
+          <h2>Mapa operativo v2</h2>
+          <p>
+            A partir de esta v2, el flujo se lee como una cadena clara: entrada del <strong class="keyword" tabindex="0" data-detail="Bandeja donde entran tickets, errores, pedidos de análisis, validaciones y tareas de deploy.">Sky Inbox</strong>,
+            <span class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</span> que conviene activar,
+            <span class="keyword" tabindex="0" data-detail="Agentes de IA especializados que toman una parte del trabajo y dejan una salida clara.">agents</span> que participan y salida esperada.
+          </p>
+        </div>
+
+        <div class="operational-map" aria-label="Mapa entrada, skill, agents y salida">
+          <div class="map-row header" aria-hidden="true">
+            <div class="map-cell">Entrada</div>
+            <div class="map-cell">Skill</div>
+            <div class="map-cell">Agents</div>
+            <div class="map-cell">Salida</div>
+          </div>
+
+          <div class="map-row">
+            <article class="map-cell" data-label="Entrada">
+              <strong>Error prod</strong>
+              <p>Alerta, log, impacto de usuario o síntoma del negocio que necesita diagnóstico rápido.</p>
+            </article>
+            <article class="map-cell" data-label="Skill">
+              <strong>Debugging + observabilidad</strong>
+              <p>Ordena impacto, señales revisadas, hipótesis y próximos pasos antes de tocar código o ambiente.</p>
+            </article>
+            <article class="map-cell" data-label="Agents">
+              <strong><span class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</span>, <span class="keyword" tabindex="0" data-detail="Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.">Buildy</span>, <span class="keyword" tabindex="0" data-detail="Revisor: mira el resultado con criterio antes de compartirlo.">Revi</span></strong>
+              <p>Primero se entiende el problema; después se propone fix, rollback, escalamiento o validación.</p>
+            </article>
+            <article class="map-cell" data-label="Salida">
+              <strong>Diagnóstico accionable</strong>
+              <p>Qué se sabe, qué falta confirmar, qué riesgo hay y qué decisión humana puede bloquear producción.</p>
+            </article>
+          </div>
+
+          <div class="map-row">
+            <article class="map-cell" data-label="Entrada">
+              <strong>Ticket Jira</strong>
+              <p>Feature, bug, deuda técnica o pedido de análisis que necesita pasar de idea a ejecución.</p>
+            </article>
+            <article class="map-cell" data-label="Skill">
+              <strong>Refinement + take ticket</strong>
+              <p>Convierte criterios, dudas, repos afectados y riesgos en un plan ejecutable.</p>
+            </article>
+            <article class="map-cell" data-label="Agents">
+              <strong><span class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</span>, <span class="keyword" tabindex="0" data-detail="Planificador: arma el camino, marca riesgos y ordena el trabajo.">Planny</span>, <span class="keyword" tabindex="0" data-detail="Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.">Buildy</span>, <span class="keyword" tabindex="0" data-detail="Validador: prueba lo importante y avisa si algo no está listo.">Quby</span></strong>
+              <p>El ticket se entiende, se planifica, se implementa y queda listo para validación.</p>
+            </article>
+            <article class="map-cell" data-label="Salida">
+              <strong>Plan, branch, MR o QA</strong>
+              <p>Trabajo trazable con pruebas esperadas, dudas abiertas y criterio de aceptación visible.</p>
+            </article>
+          </div>
+
+          <div class="map-row">
+            <article class="map-cell" data-label="Entrada">
+              <strong>QA</strong>
+              <p>Validación, regresión, smoke test o blocker que necesita estado claro para decidir avance.</p>
+            </article>
+            <article class="map-cell" data-label="Skill">
+              <strong>Plan, ejecución y reporte QA</strong>
+              <p>Define qué probar, con qué datos, en qué ambiente y cómo reportar el resultado.</p>
+            </article>
+            <article class="map-cell" data-label="Agents">
+              <strong><span class="keyword" tabindex="0" data-detail="Validador: prueba lo importante y avisa si algo no está listo.">Quby</span>, <span class="keyword" tabindex="0" data-detail="Revisor: mira el resultado con criterio antes de compartirlo.">Revi</span></strong>
+              <p>Una parte valida el caso; la otra mira riesgos, cobertura y regresiones posibles.</p>
+            </article>
+            <article class="map-cell" data-label="Salida">
+              <strong>Reporte listo para decidir</strong>
+              <p>Pasado, fallado, bloqueado, requiere fix o requiere OK humano.</p>
+            </article>
+          </div>
+
+          <div class="map-row">
+            <article class="map-cell" data-label="Entrada">
+              <strong>Deploy</strong>
+              <p>Cambio mergeado o release candidate que necesita paquete, checklist y control de publicación.</p>
+            </article>
+            <article class="map-cell" data-label="Skill">
+              <strong>Prepare deploy + deploy doc</strong>
+              <p>Arma changelog, versión, validaciones, rollback, responsable y comunicación.</p>
+            </article>
+            <article class="map-cell" data-label="Agents">
+              <strong><span class="keyword" tabindex="0" data-detail="Encargado de entrega: deja MR, resumen, deploy note o documentación lista para continuar.">Packy</span>, <span class="keyword" tabindex="0" data-detail="Revisor: mira el resultado con criterio antes de compartirlo.">Revi</span></strong>
+              <p>El paquete queda claro; la publicación se frena si falta aprobación.</p>
+            </article>
+            <article class="map-cell" data-label="Salida">
+              <strong>Release listo o frenado</strong>
+              <p>Doc de deploy, release notes, checklist y OK explícito antes de tocar producción.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band soft">
+        <div class="section-head">
+          <h2>Un caso de punta a punta</h2>
+          <p>
+            La demo puede contarse con un caso realista: entra un error de checkout, se cruza con un ticket,
+            se implementa una corrección, se valida con QA y se prepara el paso a producción.
+          </p>
+        </div>
+
+        <div class="journey-board" aria-label="Historia de un caso completo">
+          <article class="journey-step">
+            <small>01</small>
+            <strong>Entra al Inbox</strong>
+            <p>“Hay errores en checkout; este ticket describe el impacto y estos logs muestran el síntoma.”</p>
+          </article>
+          <article class="journey-step">
+            <small>02</small>
+            <strong>Orbi clasifica</strong>
+            <p>Lo marca como error productivo con ticket asociado y activa debugging + refinement.</p>
+          </article>
+          <article class="journey-step">
+            <small>03</small>
+            <strong>Specter entiende</strong>
+            <p>Lee ticket, repos, cambios recientes y señales de observabilidad para separar hechos de hipótesis.</p>
+          </article>
+          <article class="journey-step">
+            <small>04</small>
+            <strong>Buildy ejecuta</strong>
+            <p>Con el plan de Planny, prepara cambio, pruebas y MR sin pisar trabajo en curso.</p>
+          </article>
+          <article class="journey-step">
+            <small>05</small>
+            <strong>Quby y Packy cierran</strong>
+            <p>Validan lo importante, dejan reporte QA y preparan deploy con aprobación explícita.</p>
+          </article>
+        </div>
+
+        <div class="section-head spaced">
+          <h2>Qué queda guardado para retomar</h2>
+          <p>
+            Antes de bajar a la capa técnica, la lectura humana queda simple: cualquiera puede abrir el caso
+            y entender objetivo, avance, próximos responsables y decisiones pendientes.
+          </p>
+        </div>
+
+        <div class="context-grid" aria-label="Resumen humano del estado guardado">
+          <article class="context-card">
+            <strong>Objetivo</strong>
+            <p>Qué se quiere resolver, qué queda fuera y cómo sabemos que está terminado.</p>
+          </article>
+          <article class="context-card">
+            <strong>Repos y sistemas</strong>
+            <p>Servicios, pantallas, jobs, colas, documentos o herramientas que participan.</p>
+          </article>
+          <article class="context-card">
+            <strong>Lo revisado</strong>
+            <p>Tickets, logs, resultados de QA, links y cambios recientes que sostienen el diagnóstico.</p>
+          </article>
+          <article class="context-card">
+            <strong>Decisiones</strong>
+            <p>Prioridad, permiso, merge, ventana, rollback o producción cuando hace falta OK humano.</p>
+          </article>
+          <article class="context-card">
+            <strong>Próximo agent</strong>
+            <p>Quién sigue, por qué sigue y qué tiene que entregar para no reconstruir la conversación.</p>
+          </article>
+          <article class="context-card">
+            <strong>Salida esperada</strong>
+            <p>Plan, MR, reporte QA, doc de deploy, postmortem o aprendizaje para la próxima corrida.</p>
+          </article>
         </div>
       </section>
 
@@ -1336,7 +1654,7 @@
           <article class="capability">
             <span class="tag green">listo</span>
             <h3>Debugging productivo</h3>
-            <p>Separa evidencia de inferencia, revisa logs, repos, cambios recientes y deja hipótesis accionables.</p>
+            <p>Separa hechos de hipótesis, revisa logs, repos, cambios recientes y deja próximos pasos accionables.</p>
           </article>
           <article class="capability">
             <span class="tag green">listo</span>
@@ -1481,7 +1799,7 @@
                 <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué agente sigue según el objetivo y el estado actual.">Orbi</strong>
                 clasificó la entrada como ticket + debugging. Activo la <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong>
                 de análisis y paso a <strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong>
-                para separar evidencia, inferencia y decisiones pendientes.
+                para separar hechos, hipótesis y decisiones pendientes.
               </p>
               <div class="response-grid" aria-label="Resumen de la respuesta del flujo">
                 <div class="response-line">
@@ -1597,7 +1915,7 @@
     const scenarios = {
       prod: {
         title: 'Error prod',
-        copy: `Entra un síntoma, alerta, log o impacto de usuario. ${keyword('Specter', 'Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.')} arma evidencia antes de que ${keyword('Buildy', 'Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.')} toque código o ambiente.`,
+        copy: `Entra un síntoma, alerta, log o impacto de usuario. ${keyword('Specter', 'Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.')} arma contexto antes de que ${keyword('Buildy', 'Constructor: implementa cambios, investiga bugs o prepara documentos según la skill activa.')} toque código o ambiente.`,
         items: [
           'Qué pasó, dónde impacta y qué usuarios afecta.',
           'Qué dicen logs, dashboards, repos y despliegues recientes.',
@@ -1606,7 +1924,7 @@
         state: [
           'Se clasifica como error productivo y se delimita impacto, canal y urgencia.',
           `Se activa la ${keyword('skill', 'Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.')} de debugging y observabilidad.`,
-          'Logs, dashboards, cambios recientes y repos quedan separados por evidencia e inferencia.',
+          'Logs, dashboards, cambios recientes y repos quedan separados por hechos e hipótesis.',
           'La salida queda como diagnóstico, fix, rollback, escalamiento o validación pendiente.',
           'Si hay que tocar producción, queda como decisión humana antes de avanzar.'
         ]
@@ -1623,16 +1941,16 @@
           'Se clasifica como feature, ajuste, bug, deuda técnica o documentación.',
           `Se activa la ${keyword('skill', 'Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.')} de refinement o take-ticket.`,
           'Criterios, dudas, repos afectados, owners y riesgos quedan visibles antes de codear.',
-          'La salida queda como plan de implementación, branch, MR, pruebas y handoff para QA.',
+          'La salida queda como plan de implementación, branch, MR, pruebas y paso para QA.',
           'Si falta alcance, prioridad o criterio de aceptación, se pide decisión humana.'
         ]
       },
       qa: {
         title: 'QA',
-        copy: `Entra una validación pendiente o un reporte de QA. ${keyword('Quby', 'Validador: prueba lo importante y avisa si algo no está listo.')} ordena casos, evidencia y blockers antes de devolver estado.`,
+        copy: `Entra una validación pendiente o un reporte de QA. ${keyword('Quby', 'Validador: prueba lo importante y avisa si algo no está listo.')} ordena casos, resultados y blockers antes de devolver estado.`,
         items: [
           'Qué hay que probar y con qué datos.',
-          'Qué pasó, qué falló y qué evidencia queda.',
+          'Qué pasó, qué falló y qué dato queda.',
           'Qué queda bloqueado por ambiente, permiso, datos o decisión.'
         ],
         state: [
@@ -1678,7 +1996,7 @@
         .map((item, index) => `
           <div class="state-line">
             <code>${index + 1}</code>
-            <span>${item}${index === scenario.state.length - 1 ? ' <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se traduce a objetivo, estado de ejecución, salidas por rol, evidencias mínimas y pendientes accionables.">detalle</span>' : ''}</span>
+            <span>${item}${index === scenario.state.length - 1 ? ' <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se traduce a objetivo, estado de ejecución, salidas por rol, datos mínimos y pendientes accionables.">detalle</span>' : ''}</span>
           </div>
         `)
         .join('');
