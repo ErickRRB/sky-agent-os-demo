@@ -359,7 +359,7 @@
       font-size: 11px;
     }
 
-    .flow-step strong {
+    .flow-step > strong {
       display: block;
       margin-top: 8px;
       font-size: 18px;
@@ -424,7 +424,7 @@
       background: #fff;
     }
 
-    .comparison-row strong {
+    .comparison-row > strong {
       font-family: var(--mono);
       font-size: 12px;
       color: var(--ink);
@@ -449,7 +449,7 @@
       background: var(--surface);
     }
 
-    .agent-tile strong {
+    .agent-tile > strong {
       display: block;
       margin-bottom: 8px;
       color: var(--ink);
@@ -1230,26 +1230,26 @@
             </ul>
           </article>
 
-          <div class="state-machine" aria-label="Qué ve una persona">
+          <div class="state-machine" id="scenario-state" aria-label="Qué ve una persona">
             <div class="state-line">
               <code>1</code>
-              <span>El caso queda clasificado: refinement, debugging, feature, QA, deploy o documentación.</span>
+              <span>Se clasifica como error productivo y se delimita impacto, canal y urgencia.</span>
             </div>
             <div class="state-line">
               <code>2</code>
-              <span>Se activa la <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong> correcta y el equipo sabe quién sigue.</span>
+              <span>Se activa la <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong> de debugging y observabilidad.</span>
             </div>
             <div class="state-line">
               <code>3</code>
-              <span>Repos, logs, comandos, tickets y decisiones quedan separados para no mezclar evidencia con suposición.</span>
+              <span>Logs, dashboards, cambios recientes y repos quedan separados por evidencia e inferencia.</span>
             </div>
             <div class="state-line">
               <code>4</code>
-              <span>La salida queda lista como plan, cambio, MR, reporte QA, doc de deploy o handoff a producción.</span>
+              <span>La salida queda como diagnóstico, fix, rollback, escalamiento o validación pendiente.</span>
             </div>
             <div class="state-line">
               <code>5</code>
-              <span>El <strong class="keyword" tabindex="0" data-detail="Conocimiento reutilizable que evita volver a empezar desde cero en casos parecidos.">aprendizaje</strong> queda disponible para la próxima vez.
+              <span>Si hay que tocar producción, queda como decisión humana antes de avanzar.
                 <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se traduce a objetivo, estado de ejecución, salidas por rol, evidencias mínimas y pendientes accionables.">detalle</span>
               </span>
             </div>
@@ -1602,6 +1602,13 @@
           'Qué pasó, dónde impacta y qué usuarios afecta.',
           'Qué dicen logs, dashboards, repos y despliegues recientes.',
           'Próxima acción clara: investigar, revertir, fixear, validar o escalar.'
+        ],
+        state: [
+          'Se clasifica como error productivo y se delimita impacto, canal y urgencia.',
+          `Se activa la ${keyword('skill', 'Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.')} de debugging y observabilidad.`,
+          'Logs, dashboards, cambios recientes y repos quedan separados por evidencia e inferencia.',
+          'La salida queda como diagnóstico, fix, rollback, escalamiento o validación pendiente.',
+          'Si hay que tocar producción, queda como decisión humana antes de avanzar.'
         ]
       },
       ticket: {
@@ -1611,6 +1618,13 @@
           'Criterios de aceptación, dudas y alcance fuera.',
           'Repos, servicios, owners y riesgos de integración.',
           'Plan de implementación, pruebas y salida esperada para QA.'
+        ],
+        state: [
+          'Se clasifica como feature, ajuste, bug, deuda técnica o documentación.',
+          `Se activa la ${keyword('skill', 'Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.')} de refinement o take-ticket.`,
+          'Criterios, dudas, repos afectados, owners y riesgos quedan visibles antes de codear.',
+          'La salida queda como plan de implementación, branch, MR, pruebas y handoff para QA.',
+          'Si falta alcance, prioridad o criterio de aceptación, se pide decisión humana.'
         ]
       },
       qa: {
@@ -1620,6 +1634,13 @@
           'Qué hay que probar y con qué datos.',
           'Qué pasó, qué falló y qué evidencia queda.',
           'Qué queda bloqueado por ambiente, permiso, datos o decisión.'
+        ],
+        state: [
+          'Se clasifica como smoke, regresión, validación manual guiada o blocker.',
+          `Se activa la ${keyword('skill', 'Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.')} de QA plan, ejecución o reporte.`,
+          'Datos, ambiente, comandos, capturas y resultados quedan ordenados por caso.',
+          'La salida queda como reporte QA: pasado, fallado, bloqueado o requiere fix.',
+          'Si falta ambiente, credencial, datos o aprobación, se frena y queda marcado.'
         ]
       },
       release: {
@@ -1629,25 +1650,46 @@
           'Qué versión, branch, commit o MR se entrega.',
           'Qué validación, changelog, doc o rollback aplica.',
           'Qué aprobación falta para publicar o coordinar ventana.'
+        ],
+        state: [
+          'Se clasifica como deploy a stage, preparación productiva, rollback o documentación de release.',
+          `Se activa la ${keyword('skill', 'Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.')} de deploy, release notes o deploy doc.`,
+          'Versión, branch, commit, changelog, validaciones y rollback quedan en un solo paquete.',
+          'La salida queda como doc de deploy, resumen de release y checklist de publicación.',
+          'Publicar en producción requiere OK explícito, responsable, ventana y comunicación.'
         ]
       }
     };
 
     const buttons = document.querySelectorAll('.tab-button');
     const copy = document.getElementById('scenario-copy');
+    const scenarioState = document.getElementById('scenario-state');
+
+    const renderScenario = (scenario) => {
+      copy.innerHTML = `
+        <h3>${scenario.title}</h3>
+        <p>${scenario.copy}</p>
+        <ul class="scenario-list">
+          ${scenario.items.map((item) => `<li>${item}</li>`).join('')}
+        </ul>
+      `;
+
+      scenarioState.innerHTML = scenario.state
+        .map((item, index) => `
+          <div class="state-line">
+            <code>${index + 1}</code>
+            <span>${item}${index === scenario.state.length - 1 ? ' <span class="tech-hint" tabindex="0" data-detail="Bajo el capó esto se traduce a objetivo, estado de ejecución, salidas por rol, evidencias mínimas y pendientes accionables.">detalle</span>' : ''}</span>
+          </div>
+        `)
+        .join('');
+    };
 
     buttons.forEach((button) => {
       button.addEventListener('click', () => {
         buttons.forEach((candidate) => candidate.setAttribute('aria-selected', 'false'));
         button.setAttribute('aria-selected', 'true');
         const scenario = scenarios[button.dataset.scenario];
-        copy.innerHTML = `
-          <h3>${scenario.title}</h3>
-          <p>${scenario.copy}</p>
-          <ul class="scenario-list">
-            ${scenario.items.map((item) => `<li>${item}</li>`).join('')}
-          </ul>
-        `;
+        renderScenario(scenario);
       });
     });
   </script>
