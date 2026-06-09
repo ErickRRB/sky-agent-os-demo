@@ -548,13 +548,12 @@
       cursor: help;
     }
 
-    .keyword::after {
-      content: attr(data-detail);
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 10px);
-      z-index: 35;
-      width: min(330px, 78vw);
+    .keyword-tooltip {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 200;
+      max-width: min(360px, calc(100vw - 32px));
       padding: 10px 12px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -566,15 +565,16 @@
       line-height: 1.35;
       box-shadow: var(--shadow);
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transform: translate(-50%, 6px);
-      transition: opacity 160ms ease, transform 160ms ease;
+      transform: translateY(6px);
+      transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
     }
 
-    .keyword:hover::after,
-    .keyword:focus::after {
+    .keyword-tooltip.visible {
       opacity: 1;
-      transform: translate(-50%, 0);
+      visibility: visible;
+      transform: translateY(0);
     }
 
     .keyword:focus-visible {
@@ -998,7 +998,7 @@
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">Sky Inbox operativo</p>
-          <h1>Un equipo de <strong class="keyword" tabindex="0" data-detail="Roles de IA con una responsabilidad concreta dentro del flujo de trabajo.">asistentes</strong> para mover análisis, desarrollo y producción sin perder contexto.</h1>
+          <h1>Un equipo de <strong class="keyword" tabindex="0" data-detail="Roles de IA con una responsabilidad concreta dentro del flujo de trabajo.">agentes</strong> para mover análisis, desarrollo y producción sin perder contexto.</h1>
           <p>
             <strong class="keyword" tabindex="0" data-detail="Sistema operativo de trabajo con IA: ordena entradas del Sky Inbox, responsables, estado y entregas.">Sky Agent OS</strong> toma una entrada del <strong class="keyword" tabindex="0" data-detail="Bandeja donde entran tickets, errores, pedidos de análisis, validaciones y tareas de deploy.">Sky Inbox</strong>, detecta si es ticket, error, validación o deploy, elige la <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong> correcta y deja el siguiente paso claro.
           </p>
@@ -1080,7 +1080,7 @@
         <div class="section-head">
           <h2>Qué mejora del flujo anterior</h2>
           <p>
-            Antes cada ticket, análisis o incidente podía quedar mezclado en conversación. Ahora entra por el <strong class="keyword" tabindex="0" data-detail="Bandeja donde entran tickets, errores, pedidos de análisis, validaciones y tareas de deploy.">Sky Inbox</strong> y queda ordenado, retomable y con una persona o <strong class="keyword" tabindex="0" data-detail="Agente de IA especializado que toma una parte del trabajo y deja una salida clara.">asistente</strong> responsable del próximo paso.
+            Antes cada ticket, análisis o incidente podía quedar mezclado en conversación. Ahora entra por el <strong class="keyword" tabindex="0" data-detail="Bandeja donde entran tickets, errores, pedidos de análisis, validaciones y tareas de deploy.">Sky Inbox</strong> y queda ordenado, retomable y con una persona o <strong class="keyword" tabindex="0" data-detail="Agente de IA especializado que toma una parte del trabajo y deja una salida clara.">agente</strong> responsable del próximo paso.
           </p>
         </div>
 
@@ -1120,7 +1120,7 @@
               <div class="comparison">
                 <div class="comparison-row">
                   <strong>Orden</strong>
-                  <span><strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué asistente sigue según el objetivo y el estado actual.">Orbi</strong> sabe si corresponde refinement, debugging, desarrollo, QA, deploy o doc.</span>
+                  <span><strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué agente sigue según el objetivo y el estado actual.">Orbi</strong> sabe si corresponde refinement, debugging, desarrollo, QA, deploy o doc.</span>
                 </div>
                 <div class="comparison-row">
                   <strong>Bloqueos</strong>
@@ -1140,20 +1140,20 @@
         <div class="section-head">
           <h2>El equipo</h2>
           <p>
-            Para que el flujo sea fácil de recordar, cada <strong class="keyword" tabindex="0" data-detail="Agente de IA especializado que toma una parte del trabajo y deja una salida clara.">asistente</strong> tiene nombre, accesorio y una misión.
-            <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué asistente sigue según el objetivo y el estado actual.">Orbi</strong> coordina; los demás resuelven una parte concreta del trabajo.
+            Para que el flujo sea fácil de recordar, cada <strong class="keyword" tabindex="0" data-detail="Agente de IA especializado que toma una parte del trabajo y deja una salida clara.">agente</strong> tiene nombre, accesorio y una misión.
+            <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué agente sigue según el objetivo y el estado actual.">Orbi</strong> coordina; los demás resuelven una parte concreta del trabajo.
           </p>
         </div>
 
         <figure class="agent-art-figure contain">
           <img src="assets/agent-art-named-agents.png" alt="Ilustración renderizada del equipo: Orbi, Specter, Planny, Buildy, Quby, Revi, Packy y Memo con accesorios distintos.">
-          <figcaption>La misma silueta, distinto gorrito: cada asistente se reconoce rápido y cumple una misión concreta.</figcaption>
+          <figcaption>La misma silueta, distinto gorrito: cada agente se reconoce rápido y cumple una misión concreta.</figcaption>
         </figure>
 
         <div class="agent-grid">
           <article class="agent-tile">
             <span class="tag blue">control</span>
-            <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué asistente sigue según el objetivo y el estado actual.">Orbi</strong>
+            <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué agente sigue según el objetivo y el estado actual.">Orbi</strong>
             <p>Lee el Sky Inbox, decide qué flujo sigue y frena si falta una <strong class="keyword" tabindex="0" data-detail="Punto donde el sistema pide criterio, prioridad u OK de una persona antes de seguir.">decisión humana</strong>.
               <span class="tech-hint" tabindex="0" data-detail="Rol interno: orquestador. Decide el próximo paso con el estado guardado del objetivo.">detalle</span>
             </p>
@@ -1413,7 +1413,7 @@
           <h2>Bajo el capó</h2>
           <p>
             Esta parte es para tecnología o para quienes quieran entender cómo se conserva <strong class="keyword" tabindex="0" data-detail="Capacidad de retomar un trabajo sin reconstruir toda la conversación anterior.">continuidad</strong>
-            entre corridas, <strong class="keyword" tabindex="0" data-detail="Agentes de IA especializados que toman una parte del trabajo y dejan una salida clara.">asistentes</strong> y <strong class="keyword" tabindex="0" data-detail="Sistemas externos o utilidades que el flujo puede consultar, preparar o usar con aprobación.">herramientas</strong>.
+            entre corridas, <strong class="keyword" tabindex="0" data-detail="Agentes de IA especializados que toman una parte del trabajo y dejan una salida clara.">agentes</strong> y <strong class="keyword" tabindex="0" data-detail="Sistemas externos o utilidades que el flujo puede consultar, preparar o usar con aprobación.">herramientas</strong>.
           </p>
         </div>
 
@@ -1478,7 +1478,7 @@
             <article class="chat-message assistant">
               <span class="message-label">Sky Agent OS</span>
               <p>
-                <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué asistente sigue según el objetivo y el estado actual.">Orbi</strong>
+                <strong class="keyword" tabindex="0" data-detail="Coordinador: decide qué agente sigue según el objetivo y el estado actual.">Orbi</strong>
                 clasificó la entrada como ticket + debugging. Activo la <strong class="keyword" tabindex="0" data-detail="Instrucción reutilizable que le enseña a un agente cómo resolver una clase de trabajo.">skill</strong>
                 de análisis y paso a <strong class="keyword" tabindex="0" data-detail="Creador de contexto: lee tickets, logs, repos y reglas del flujo antes de proponer acción.">Specter</strong>
                 para separar evidencia, inferencia y decisiones pendientes.
@@ -1511,7 +1511,7 @@
     <footer class="footer">
       <p>
         Sky Agent OS no reemplaza la aprobación humana: organiza entradas del Sky Inbox para que la IA y los
-        asistentes avancen donde es seguro, y se detengan cuando hace falta una decisión.
+        agentes avancen donde es seguro, y se detengan cuando hace falta una decisión.
       </p>
     </footer>
   </div>
@@ -1519,6 +1519,80 @@
   <script>
     const keyword = (label, detail) =>
       `<strong class="keyword" tabindex="0" data-detail="${detail}">${label}</strong>`;
+
+    const keywordTooltip = document.createElement('div');
+    keywordTooltip.id = 'keyword-tooltip';
+    keywordTooltip.className = 'keyword-tooltip';
+    keywordTooltip.setAttribute('role', 'tooltip');
+    document.body.appendChild(keywordTooltip);
+
+    let activeKeyword = null;
+    const tooltipMargin = 12;
+
+    const getKeywordTarget = (target) =>
+      target instanceof Element ? target.closest('.keyword') : null;
+
+    const positionKeywordTooltip = (target) => {
+      const detail = target.dataset.detail;
+      if (!detail) return;
+
+      keywordTooltip.textContent = detail;
+      keywordTooltip.classList.add('visible');
+      const targetRect = target.getBoundingClientRect();
+      const tooltipRect = keywordTooltip.getBoundingClientRect();
+      const preferredLeft = targetRect.left + targetRect.width / 2 - tooltipRect.width / 2;
+      const maxLeft = window.innerWidth - tooltipRect.width - tooltipMargin;
+      const left = Math.max(tooltipMargin, Math.min(preferredLeft, maxLeft));
+      const aboveTop = targetRect.top - tooltipRect.height - 10;
+      const preferredTop = aboveTop >= tooltipMargin ? aboveTop : targetRect.bottom + 10;
+      const maxTop = window.innerHeight - tooltipRect.height - tooltipMargin;
+      const top = Math.max(tooltipMargin, Math.min(preferredTop, maxTop));
+
+      keywordTooltip.style.left = `${Math.round(left)}px`;
+      keywordTooltip.style.top = `${Math.round(top)}px`;
+    };
+
+    const showKeywordTooltip = (target) => {
+      activeKeyword = target;
+      target.setAttribute('aria-describedby', 'keyword-tooltip');
+      positionKeywordTooltip(target);
+    };
+
+    const hideKeywordTooltip = (target) => {
+      if (target) target.removeAttribute('aria-describedby');
+      activeKeyword = null;
+      keywordTooltip.classList.remove('visible');
+    };
+
+    document.addEventListener('mouseover', (event) => {
+      const target = getKeywordTarget(event.target);
+      if (target) showKeywordTooltip(target);
+    });
+
+    document.addEventListener('mouseout', (event) => {
+      const target = getKeywordTarget(event.target);
+      const relatedInsideTarget =
+        event.relatedTarget instanceof Node && target?.contains(event.relatedTarget);
+      if (target && !relatedInsideTarget) hideKeywordTooltip(target);
+    });
+
+    document.addEventListener('focusin', (event) => {
+      const target = getKeywordTarget(event.target);
+      if (target) showKeywordTooltip(target);
+    });
+
+    document.addEventListener('focusout', (event) => {
+      const target = getKeywordTarget(event.target);
+      if (target) hideKeywordTooltip(target);
+    });
+
+    window.addEventListener('scroll', () => {
+      if (activeKeyword) positionKeywordTooltip(activeKeyword);
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      if (activeKeyword) positionKeywordTooltip(activeKeyword);
+    });
 
     const scenarios = {
       prod: {
