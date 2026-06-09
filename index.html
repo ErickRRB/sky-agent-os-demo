@@ -62,6 +62,90 @@
       min-height: 100vh;
     }
 
+    body.auth-locked {
+      overflow: hidden;
+    }
+
+    body.auth-locked .page-shell {
+      display: none;
+    }
+
+    body.auth-locked .tech-hint::after {
+      content: none;
+    }
+
+    body.is-authenticated .auth-gate {
+      display: none;
+    }
+
+    .auth-gate {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: clamp(20px, 6vw, 64px);
+      background:
+        linear-gradient(90deg, rgba(23, 23, 23, 0.035) 1px, transparent 1px),
+        linear-gradient(rgba(23, 23, 23, 0.035) 1px, transparent 1px),
+        var(--bg);
+      background-size: 42px 42px;
+    }
+
+    .auth-card {
+      width: min(460px, 100%);
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .auth-card h1 {
+      font-size: clamp(30px, 8vw, 46px);
+      line-height: 0.98;
+    }
+
+    .auth-card p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .auth-form {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .auth-label {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .auth-input {
+      width: 100%;
+      min-height: 46px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .auth-input:focus {
+      outline: 2px solid rgba(39, 103, 199, 0.32);
+      outline-offset: 2px;
+    }
+
+    .auth-error {
+      min-height: 20px;
+      margin: 0;
+      color: var(--red);
+      font-size: 14px;
+    }
+
     .topbar {
       position: sticky;
       top: 0;
@@ -131,6 +215,22 @@
 
     .nav a:hover {
       border-color: var(--line);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .nav-logout {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .nav-logout:hover {
       color: var(--ink);
       background: rgba(255, 255, 255, 0.7);
     }
@@ -596,6 +696,82 @@
       font-size: 14px;
     }
 
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .tech-card {
+      min-height: 158px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .tech-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    .tech-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tech-list {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tech-list li {
+      padding: 9px 10px;
+      border-left: 3px solid var(--orange);
+      background: var(--orange-soft);
+      color: #3c2a1f;
+      font-size: 14px;
+    }
+
+    .concept-table {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .concept-row {
+      display: grid;
+      grid-template-columns: minmax(170px, 0.75fr) minmax(210px, 1fr) minmax(280px, 1.25fr);
+      gap: 10px;
+    }
+
+    .concept-cell {
+      min-width: 0;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .concept-row.header .concept-cell {
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .concept-cell strong {
+      color: var(--ink);
+    }
+
     .tag {
       display: inline-flex;
       align-items: center;
@@ -1054,11 +1230,16 @@
 
       .capability-grid,
       .context-grid,
+      .tech-grid,
       .split {
         grid-template-columns: 1fr;
       }
 
       .map-row {
+        grid-template-columns: 1fr;
+      }
+
+      .concept-row {
         grid-template-columns: 1fr;
       }
 
@@ -1126,8 +1307,25 @@
     }
   </style>
 </head>
-<body>
-  <div class="page-shell">
+<body class="auth-locked">
+  <section class="auth-gate" id="auth-gate" aria-label="Acceso protegido">
+    <div class="auth-card">
+      <p class="eyebrow">Demo protegida</p>
+      <h1>Sky Agent OS</h1>
+      <p>Ingresá el password de la demo para ver el flujo de Sky Inbox.</p>
+      <form class="auth-form" id="auth-form">
+        <label class="auth-label" for="auth-password">Password</label>
+        <input class="auth-input" id="auth-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="button" type="submit">Entrar</button>
+        <p class="auth-error" id="auth-error" role="alert" aria-live="polite"></p>
+      </form>
+      <noscript>
+        <p>Esta demo necesita JavaScript para validar el acceso.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <div class="page-shell" id="page-shell" aria-hidden="true">
     <header class="topbar">
       <div class="brand">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -1140,6 +1338,7 @@
         <a href="#v2">V2</a>
         <a href="#estado">Estado</a>
         <a href="#capo">Bajo el capó</a>
+        <button class="nav-logout" type="button" id="logout-button">Salir</button>
       </nav>
     </header>
 
@@ -1223,6 +1422,7 @@
             </p>
           </article>
         </div>
+
       </section>
 
       <section class="band soft">
@@ -1404,6 +1604,7 @@
             </div>
           </div>
         </div>
+
       </section>
 
       <section id="v2" class="band white">
@@ -1500,6 +1701,7 @@
             </article>
           </div>
         </div>
+
       </section>
 
       <section class="band soft">
@@ -1822,6 +2024,114 @@
             </article>
           </div>
         </div>
+
+        <div class="section-head spaced">
+          <h2>Cómo decide pedir OK humano</h2>
+          <p>
+            El sistema no “adivina” permisos. Cada paso se evalúa contra reglas de riesgo:
+            impacto, reversibilidad, confianza del diagnóstico, permisos externos y señales incompletas.
+          </p>
+        </div>
+
+        <div class="tech-grid" aria-label="Reglas de decisión humana">
+          <article class="tech-card">
+            <strong>1. Señales del caso</strong>
+            <p>El flujo mira el tipo de entrada, urgencia, ambiente, usuarios impactados, repos afectados y cambios recientes.</p>
+            <ul class="tech-list">
+              <li>Producción, dinero, login, pagos o datos sensibles suben el nivel de cuidado.</li>
+              <li>Si falta criterio de aceptación, owner o prioridad, no se inventa.</li>
+            </ul>
+          </article>
+          <article class="tech-card">
+            <strong>2. Reglas de avance</strong>
+            <p>Cada skill declara qué puede hacer sola y qué requiere aprobación humana antes de seguir.</p>
+            <ul class="tech-list">
+              <li>Leer, analizar, resumir y preparar suele ser automático.</li>
+              <li>Mergear, publicar, borrar, cambiar permisos o tocar producción pide OK.</li>
+            </ul>
+          </article>
+          <article class="tech-card">
+            <strong>3. Umbral de confianza</strong>
+            <p>Si hay datos contradictorios, hipótesis débiles o fallos repetidos, el flujo baja velocidad y pide decisión.</p>
+            <ul class="tech-list">
+              <li>Después de intentos fallidos, se registra bloqueo en vez de insistir.</li>
+              <li>El siguiente paso queda como pregunta concreta, no como texto suelto.</li>
+            </ul>
+          </article>
+          <article class="tech-card">
+            <strong>4. Acción propuesta</strong>
+            <p>Antes de ejecutar algo sensible, el agente deja qué haría, por qué, impacto esperado y rollback posible.</p>
+          </article>
+          <article class="tech-card">
+            <strong>5. Gate humano</strong>
+            <p>La aprobación funciona como un human-in-the-loop gate: una persona valida prioridad, permiso, ventana o alcance.</p>
+          </article>
+          <article class="tech-card">
+            <strong>6. Trazabilidad</strong>
+            <p>La decisión queda vinculada al objetivo, al estado del flujo, al agente que la pidió y a la salida que desbloquea.</p>
+          </article>
+        </div>
+
+        <div class="section-head spaced">
+          <h2>Orquestación y conceptos estándar</h2>
+          <p>
+            Los nombres internos ayudan a operar, pero técnicamente corresponden a patrones conocidos:
+            cola de entrada, router de workflow, checkpoints, artefactos entre roles y audit trail.
+          </p>
+        </div>
+
+        <div class="concept-table" aria-label="Equivalencias técnicas del flujo">
+          <div class="concept-row header" aria-hidden="true">
+            <div class="concept-cell">En esta demo</div>
+            <div class="concept-cell">Concepto estándar</div>
+            <div class="concept-cell">Qué resuelve</div>
+          </div>
+          <div class="concept-row">
+            <div class="concept-cell"><strong>Sky Inbox</strong></div>
+            <div class="concept-cell">Intake queue / work queue</div>
+            <div class="concept-cell">Normaliza tickets, errores, pedidos de QA y deploy como entradas priorizables.</div>
+          </div>
+          <div class="concept-row">
+            <div class="concept-cell"><strong>Clasificación</strong></div>
+            <div class="concept-cell">Workflow routing</div>
+            <div class="concept-cell">Decide qué flujo conviene activar según tipo de trabajo, riesgo y datos disponibles.</div>
+          </div>
+          <div class="concept-row">
+            <div class="concept-cell"><strong>Skill</strong></div>
+            <div class="concept-cell">Playbook / runbook</div>
+            <div class="concept-cell">Define pasos, límites, validaciones y criterios de freno para una clase de trabajo.</div>
+          </div>
+          <div class="concept-row">
+            <div class="concept-cell"><strong>Agent</strong></div>
+            <div class="concept-cell">Role-based worker</div>
+            <div class="concept-cell">Ejecuta una responsabilidad acotada: analizar, planear, construir, validar, revisar o empaquetar.</div>
+          </div>
+          <div class="concept-row">
+            <div class="concept-cell"><strong>Estado</strong></div>
+            <div class="concept-cell">Workflow state / checkpoint</div>
+            <div class="concept-cell">Guarda dónde va el caso, quién sigue, qué falta, qué se aprobó y qué está bloqueado.</div>
+          </div>
+          <div class="concept-row">
+            <div class="concept-cell"><strong>Entrega intermedia</strong></div>
+            <div class="concept-cell">Artifact handoff</div>
+            <div class="concept-cell">Permite que un agente le deje al siguiente una salida verificable sin repetir todo el análisis.</div>
+          </div>
+          <div class="concept-row">
+            <div class="concept-cell"><strong>Datos revisados</strong></div>
+            <div class="concept-cell">Evidence bundle / context pack</div>
+            <div class="concept-cell">Agrupa links, comandos, logs mínimos, rutas y decisiones sin copiar dumps completos ni secretos.</div>
+          </div>
+          <div class="concept-row">
+            <div class="concept-cell"><strong>OK humano</strong></div>
+            <div class="concept-cell">Human-in-the-loop approval gate</div>
+            <div class="concept-cell">Evita que la automatización tome decisiones sensibles sin permiso explícito.</div>
+          </div>
+          <div class="concept-row">
+            <div class="concept-cell"><strong>Historial</strong></div>
+            <div class="concept-cell">Audit trail</div>
+            <div class="concept-cell">Deja trazable qué entrada llegó, qué se decidió, qué agente actuó y qué salida produjo.</div>
+          </div>
+        </div>
       </section>
 
     </main>
@@ -1835,6 +2145,98 @@
   </div>
 
   <script>
+    const AUTH_STORAGE_KEY = 'sky-agent-os-demo-auth-v2';
+    const AUTH_PASSWORD_HASH = '31a1964674a9acd29efff1aab8e43a3f3e4195c5e6d40dcce2a7b4bc15b5598d';
+    const authForm = document.getElementById('auth-form');
+    const authGate = document.getElementById('auth-gate');
+    const pageShell = document.getElementById('page-shell');
+    const authPassword = document.getElementById('auth-password');
+    const authError = document.getElementById('auth-error');
+    const logoutButton = document.getElementById('logout-button');
+
+    const hashPassword = async (value) => {
+      const bytes = new TextEncoder().encode(value);
+      const digest = await crypto.subtle.digest('SHA-256', bytes);
+      return [...new Uint8Array(digest)]
+        .map((byte) => byte.toString(16).padStart(2, '0'))
+        .join('');
+    };
+
+    const hasAuthSession = () => {
+      try {
+        return localStorage.getItem(AUTH_STORAGE_KEY) === AUTH_PASSWORD_HASH;
+      } catch {
+        return false;
+      }
+    };
+
+    const saveAuthSession = () => {
+      try {
+        localStorage.setItem(AUTH_STORAGE_KEY, AUTH_PASSWORD_HASH);
+      } catch {
+        // If storage is unavailable, the current page still unlocks for this load.
+      }
+    };
+
+    const clearAuthSession = () => {
+      try {
+        localStorage.removeItem(AUTH_STORAGE_KEY);
+      } catch {
+        // Ignore storage cleanup failures in locked-down browsers.
+      }
+    };
+
+    const unlockDemo = () => {
+      authGate.setAttribute('aria-hidden', 'true');
+      pageShell.removeAttribute('aria-hidden');
+      document.body.classList.remove('auth-locked');
+      document.body.classList.add('is-authenticated');
+    };
+
+    const lockDemo = () => {
+      clearAuthSession();
+      authGate.removeAttribute('aria-hidden');
+      pageShell.setAttribute('aria-hidden', 'true');
+      document.body.classList.add('auth-locked');
+      document.body.classList.remove('is-authenticated');
+      authForm.reset();
+      authError.textContent = '';
+      authPassword.focus();
+    };
+
+    if (hasAuthSession()) {
+      unlockDemo();
+    } else if (window.crypto?.subtle) {
+      authPassword.focus();
+    } else {
+      authError.textContent = 'Este navegador no soporta validación local segura.';
+    }
+
+    authForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      authError.textContent = '';
+
+      if (!window.crypto?.subtle) {
+        authError.textContent = 'Este navegador no soporta validación local segura.';
+        return;
+      }
+
+      const password = new FormData(authForm).get('password')?.toString() ?? '';
+      const passwordHash = await hashPassword(password);
+
+      if (passwordHash === AUTH_PASSWORD_HASH) {
+        saveAuthSession();
+        unlockDemo();
+        authForm.reset();
+        return;
+      }
+
+      authError.textContent = 'Password incorrecto.';
+      authPassword.select();
+    });
+
+    logoutButton.addEventListener('click', lockDemo);
+
     const keyword = (label, detail) =>
       `<strong class="keyword" tabindex="0" data-detail="${detail}">${label}</strong>`;
 
